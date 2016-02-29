@@ -14,6 +14,8 @@
     <clobbers target="SuperCollider" />
   </js-module>
 
+  <dependency id="net.sf.supercollider.android" url="." subdir="net.sf.supercollider.android" />
+
   <!-- android -->
   <platform name="android">
     <config-file target="res/xml/config.xml" parent="/*">
@@ -21,7 +23,6 @@
         <param name="android-package" value="edu.macalester.comp255.plugins.SuperCollider" />
       </feature>
     </config-file>
-    <source-file src="supercollider.jar" target-dir="libs/" />
     <source-file src="src/android/SuperCollider.java" target-dir="src/edu/macalester/comp255/plugins" />
     <lib-file src="libs/armeabi/gdbserver" arch="device" />
     <lib-file src="libs/armeabi/gdb.setup" arch="device" />

@@ -14,7 +14,7 @@ import net.sf.supercollider.android.ScService;
 
 public class SuperCollider extends CordovaPlugin {
     public static final String dllDirStr = "libs";
-    ScAudio superCollider;
+    SCAudio superCollider;
 
     protected void pluginInitialize() {
         // Where to find the plugin DLLs
@@ -23,7 +23,8 @@ public class SuperCollider extends CordovaPlugin {
         superCollider.start();
     }
 
-    public boolean execute(String action, JSONArray args, CallbackConext callbackConext) {
+    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
         callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, 0));
+        return true;
     }
 }

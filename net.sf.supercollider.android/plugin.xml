@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+           id="net.sf.supercollider.android"
+      version="0.1.0">
+    <name>net.sf.supercollider.android</name>
+    <description>net.sf.supercollider.android</description>
+    <license>Apache License, Version 2.0</license>
+    <keywords>net.sf.supercollider.android</keywords>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="net.sf.supercollider.android">
+                <param name="android-package" value="net.sf.supercollider.android"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/supercollider.jar" target-dir="libs" framework="true" />
+     </platform>
+</plugin>
