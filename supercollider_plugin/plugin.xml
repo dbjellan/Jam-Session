@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="edu.macalester.comp255.plugins.SuperCollider"
+        version="0.0.1">
+
+  <name>Alert</name>
+  <description>A Cordova plugin that displays an alert popup dialog</description>
+
+  <engines>
+    <engine name="cordova" version=">=3.6.0" />
+  </engines>
+
+  <js-module src="www/supercollider.js" name="SuperCollider">
+    <clobbers target="SuperCollider" />
+  </js-module>
+
+  <!-- android -->
+  <platform name="android">
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="SuperCollider Interface">
+        <param name="android-package" value="edu.macalester.comp255.plugins.SuperCollider" />
+      </feature>
+    </config-file>
+    <source-file src="supercollider.jar" target-dir="libs/" />
+    <source-file src="src/android/SuperCollider.java" target-dir="src/edu/macalester/comp255/plugins" />
+    <lib-file src="libs/armeabi/gdbserver" arch="device" />
+    <lib-file src="libs/armeabi/gdb.setup" arch="device" />
+    <lib-file src="libs/armeabi/libAY_UGen.so" arch="device" />
+    <lib-file src="libs/armeabi/libBinaryOpUGens.so" arch="device" />
+    <lib-file src="libs/armeabi/libChaosUGens.so" arch="device" />
+    <lib-file src="libs/armeabi/libcrystax.so" arch="device" />
+    <lib-file src="libs/armeabi/libDelayUGens.so" arch="device" />
+    <lib-file src="libs/armeabi/libDemandUGens.so" arch="device" />
+    <lib-file src="libs/armeabi/libDynNoiseUGens.so" arch="device" />
+    <lib-file src="libs/armeabi/libFFT_UGens.so" arch="device" />
+    <lib-file src="libs/armeabi/libFilterUGens.so" arch="device" />
+    <lib-file src="libs/armeabi/libGendynUGens.so" arch="device" />
+    <lib-file src="libs/armeabi/libgnustl_shared.so" arch="device" />
+    <lib-file src="libs/armeabi/libGrainUGens.so" arch="device" />
+    <lib-file src="libs/armeabi/libIOUGens.so" arch="device" />
+    <lib-file src="libs/armeabi/libLFUGens.so" arch="device" />
+    <lib-file src="libs/armeabi/libMCLDBufferUGens.so" arch="device" />
+    <lib-file src="libs/armeabi/libMCLDFFTUGens.so" arch="device" />
+    <lib-file src="libs/armeabi/libMCLDTreeUGens.so" arch="device" />
+    <lib-file src="libs/armeabi/libMCLDTriggeredStatsUgens.so" arch="device" />
+    <lib-file src="libs/armeabi/libML_UGens.so" arch="device" />
+    <lib-file src="libs/armeabi/libMulAddUGens.so" arch="device" />
+    <lib-file src="libs/armeabi/libNoiseUGens.so" arch="device" />
+    <lib-file src="libs/armeabi/libOscUGens.so" arch="device" />
+    <lib-file src="libs/armeabi/libPanUGens.so" arch="device" />
+    <lib-file src="libs/armeabi/libPhysicalModelingUGens.so" arch="device" />
+    <lib-file src="libs/armeabi/libReverbUGens.so" arch="device" />
+    <lib-file src="libs/armeabi/libscsynth.so" arch="device" />
+    <lib-file src="libs/armeabi/libsndfile.so" arch="device" />
+    <lib-file src="libs/armeabi/libTriggerUGens.so" arch="device" />
+    <lib-file src="libs/armeabi/libUnaryOpUGens.so" arch="device" />
+    <lib-file src="libs/x86/gdbserver" arch="simulator" />
+    <lib-file src="libs/x86/gdb.setup" arch="simulator" />
+    <lib-file src="libs/x86/libAY_UGen.so" arch="simulator" />
+    <lib-file src="libs/x86/libBinaryOpUGens.so" arch="simulator" />
+    <lib-file src="libs/x86/libChaosUGens.so" arch="simulator" />
+    <lib-file src="libs/x86/libcrystax.so" arch="simulator" />
+    <lib-file src="libs/x86/libDelayUGens.so" arch="simulator" />
+    <lib-file src="libs/x86/libDemandUGens.so" arch="simulator" />
+    <lib-file src="libs/x86/libDynNoiseUGens.so" arch="simulator" />
+    <lib-file src="libs/x86/libFFT_UGens.so" arch="simulator" />
+    <lib-file src="libs/x86/libFilterUGens.so" arch="simulator" />
+    <lib-file src="libs/x86/libGendynUGens.so" arch="simulator" />
+    <lib-file src="libs/x86/libgnustl_shared.so" arch="simulator" />
+    <lib-file src="libs/x86/libGrainUGens.so" arch="simulator" />
+    <lib-file src="libs/x86/libIOUGens.so" arch="simulator" />
+    <lib-file src="libs/x86/libLFUGens.so" arch="simulator" />
+    <lib-file src="libs/x86/libMCLDBufferUGens.so" arch="simulator" />
+    <lib-file src="libs/x86/libMCLDFFTUGens.so" arch="simulator" />
+    <lib-file src="libs/x86/libMCLDTreeUGens.so" arch="simulator" />
+    <lib-file src="libs/x86/libMCLDTriggeredStatsUgens.so" arch="simulator" />
+    <lib-file src="libs/x86/libML_UGens.so" arch="simulator" />
+    <lib-file src="libs/x86/libMulAddUGens.so" arch="simulator" />
+    <lib-file src="libs/x86/libNoiseUGens.so" arch="simulator" />
+    <lib-file src="libs/x86/libOscUGens.so" arch="simulator" />
+    <lib-file src="libs/x86/libPanUGens.so" arch="simulator" />
+    <lib-file src="libs/x86/libPhysicalModelingUGens.so" arch="simulator" />
+    <lib-file src="libs/x86/libReverbUGens.so" arch="simulator" />
+    <lib-file src="libs/x86/libscsynth.so" arch="simulator" />
+    <lib-file src="libs/x86/libsndfile.so" arch="simulator" />
+    <lib-file src="libs/x86/libTriggerUGens.so" arch="simulator" />
+    <lib-file src="libs/x86/libUnaryOpUGens.so" arch="simulator" />
+
+  </platform>
+
+
+</plugin>
