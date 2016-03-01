@@ -8,3 +8,5 @@ module.exports = {
       [frequency, duration]);
   }
 };
+
+/* SuperCollder.playNote('440', '1.5')
