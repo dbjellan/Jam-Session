@@ -20,7 +20,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
-    SuperCollider.playNote();
+    cordova.plugins.supercollider.playNote();
   });
 })
 

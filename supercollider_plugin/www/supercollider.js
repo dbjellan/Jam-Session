@@ -1,4 +1,4 @@
-var SuperCollder = {
+module.exports = {
   playNote: function(frequency, duration) {
     cordova.exec(
       successCallback,

@@ -20,11 +20,7 @@
     "cordova-plugin-whitelist",
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
-    "ionic-plugin-keyboard",
-    {
-      "locator": "../supercollider_plugin",
-      "id": "supercollider"
-    }
+    "ionic-plugin-keyboard"
   ],
   "cordovaPlatforms": [
     "android"
