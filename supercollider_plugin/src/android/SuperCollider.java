@@ -17,8 +17,6 @@ public class SuperCollider extends CordovaPlugin {
     SCAudio superCollider;
 
     protected void pluginInitialize() {
-        // Where to find the plugin DLLs
-        // Starting SuperCollider:
         superCollider = new SCAudio(dllDirStr);
         superCollider.start();
     }

@@ -1,4 +1,4 @@
-module.exports = {
+var SuperCollder = {
   playNote: function(frequency, duration) {
     cordova.exec(
       successCallback,
@@ -9,4 +9,3 @@ module.exports = {
   }
 };
 
-/* SuperCollder.playNote('440', '1.5')

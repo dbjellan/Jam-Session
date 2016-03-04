@@ -1,5 +1,6 @@
 var Drawing = (function() {
 
+
   var drawKeyboard = function(svg, x, y, width, height, keys) {
     if (!keys) {
       keys = 8;

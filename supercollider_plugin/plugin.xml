@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-        id="edu.macalester.comp255.plugins.SuperCollider"
+        id="supercollider"
         version="0.0.1">
 
-  <name>Alert</name>
+  <name>supercollider</name>
   <description>A Cordova plugin that displays an alert popup dialog</description>
 
   <engines>
     <engine name="cordova" version=">=3.6.0" />
   </engines>
 
-  <js-module src="www/supercollider.js" name="SuperCollider">
-    <clobbers target="SuperCollider" />
+  <js-module src="www/supercollider.js" name="supercollider">
+    <clobbers target="supercollider" />
   </js-module>
 
   <dependency id="net.sf.supercollider.android" url="." subdir="net.sf.supercollider.android" />
