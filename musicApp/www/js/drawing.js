@@ -11,50 +11,57 @@ Draws a keyboard out of svg items(?), position (x,y), and TOTAL size width*heigh
       keys = 13;
     }
 
-    var keywidth = width/keys
+    var keywidth = width/keys;
     var keyx = 30;
 
     console.log('drawing keyboard')
 
-    for (var i = 1; i <= keys; i++) {
+    for (var i = 0; i < keys; i++) {
 
-      if(i%3 || i%7) { //makes black key
-        keyx += (keywidth/2);
+/*     if(((i%2)!=0) || ((i%6)!=0)) {
         console.log('drawing black key')
-        drawKey(svg, keyx, 50-(height*(2/3)), keywidth, 100-(height*(2/3)),"black"));
-        keyx += (keywidth/2);
-        }
+        drawKey(svg, keyx +(i*keywidth), 50, keywidth, 100, "white"));
+        i++;
+        drawKey(svg,(keyx -(keywidth/2))+(i*keywidth), 50-20, keywidth, 100-20,"black"));
+       }
       else{ //draw white key
-        keyx += keywidth;
-        drawKey(svg, keyx, 50, keywidth,100,"white");
-      }
+        drawKey(svg,keyx+(i*keywidth), 50, keywidth, 100, "white"));
+      }*/
 
       //This is the mess of unfactored code- keeping because it doesn't use the new method
 
-/*
-      console.log('drawing white key')
+     if(((i%2)!=0) || ((i%6)!=0)) {
       //drawing white keys
-      var key = svg.rect(keyx, 50, keywidth, 100);
+      console.log('drawing white key')
+      var key = svg.rect(keyx+((i)*keywidth), 50, keywidth, 100);
       key.attr({
         fill: "white",
-            stroke: "#000",
-            strokeWidth: 2
-        })
-
-      if(i%3 || i%7) {
+        stroke: "#000",
+        strokeWidth: 2
+      })
+      i++; //commenting out this line will correct the spacing of white keys, but also draw way too many
       //makes black key
-      keyx = keyx+(keywidth/2);
       console.log('drawing black key')
-      keyx = keyx+(keywidth/2);
-      var key = svg.rect(x, 50-20, keywidth, 100-20); //3rd and 7th keys have no black keys, use mod
+      var key = svg.rect((keyx-(keywidth/2))+((i-1)*keywidth), 50-20, keywidth, 100-20); //3rd and 7th keys have no black keys, use mod
       key.attr({
         fill: "black",
           stroke: "#000",
           strokeWidth: 2
       })
       }
-      else{keyx = keyx+keywidth;} //updates position of next key
-*/
+
+      else{
+        //drawing white keys
+        console.log('drawing white key')
+        var key = svg.rect(keyx+(i*keywidth), 50, keywidth, 100);
+        key.attr({
+          fill: "white",
+          stroke: "#000",
+          strokeWidth: 2
+        })
+        //keyx = keyx+keywidth; //sets up position of next key
+      }
+
     }
   }
 
@@ -72,6 +79,7 @@ Draws a keyboard out of svg items(?), position (x,y), and TOTAL size width*heigh
 
   var exports = {
     drawKeyboard: drawKeyboard
+    //drawKey: drawKey
   };
 
   return exports;
