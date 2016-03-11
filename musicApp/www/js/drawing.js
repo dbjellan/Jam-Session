@@ -4,9 +4,8 @@ var Drawing = (function() {
 Draws a keyboard out of svg vector rectangles, position (x,y), and TOTAL size width*height with keys keys.
 TODO: change signature to drawKeyboard(svg, x, y, width, height, keys, pressCB, releaseCB)
 TODO: and modify the code so when nth key is pressed pressCB(n) is called and when you release it, releaseCB(n) is called
-TODO: find some way to keep track of all the keys so that they can respond to these behaviors
 */
-  var drawKeyboard = function(svg, x, y, width, height, keys,) {
+  var drawKeyboard = function(svg, x, y, width, height, keys, pressCB, releaseCB) {
   //Avoids a case where the number of keys is undefined
     if (!keys) {
       keys = 13;
@@ -14,8 +13,14 @@ TODO: find some way to keep track of all the keys so that they can respond to th
 
     var keywidth = width/keys;
     var keyx = 30;
+    whiteKeys = []; //both of these arrays are global to reach the drawKeys function
+    blackKeys = []; //this could be dangerous- how do you global only within a file again?
+    /*For those using the indexes in these arrays to play notes:
+      Indexes for whiteKeys should be 0-7
+      Indexs*/
 
     console.log('drawing keyboard')
+
      for (var i = 0; i < (keys-((keys/13)*5)); i++) {
       console.log('drawing white key')
       drawKey(svg,keyx+(i*keywidth), y, keywidth, height, "white");
@@ -38,6 +43,15 @@ TODO: find some way to keep track of all the keys so that they can respond to th
                 stroke: "#000",
                 strokeWidth: 2
             });
+/*     if(color = "white") {whiteKeys.push(key);}
+     else {blackKeys.push(key);}
+
+     key.click(clickCallBack);*/
+  }
+
+  /*Reacts to button presses and calls the supercolider*/
+  var clickCallBack = function(pressCB) {
+    //what do I dooo???
   }
 
 
