@@ -2,8 +2,7 @@ var Drawing = (function() {
 
 /*
 Draws a keyboard out of svg vector rectangles, position (x,y), and TOTAL size width*height with keys keys.
-TODO: change signature to drawKeyboard(svg, x, y, width, height, keys, pressCB, releaseCB)
-TODO: and modify the code so when nth key is pressed pressCB(n) is called and when you release it, releaseCB(n) is called
+TODO: pass the callback functions to the correct methods, uncomment the lines that call them
 */
   var drawKeyboard = function(svg, x, y, width, height, keys, pressCB, releaseCB) {
   //Avoids a case where the number of keys is undefined
@@ -15,49 +14,61 @@ TODO: and modify the code so when nth key is pressed pressCB(n) is called and wh
     var keyx = 30;
     whiteKeys = []; //both of these arrays are global to reach the drawKeys function
     blackKeys = []; //this could be dangerous- how do you global only within a file again?
-    /*For those using the indexes in these arrays to play notes:
-      Indexes for whiteKeys should be 0-7
-      Indexs*/
 
     console.log('drawing keyboard')
 
      for (var i = 0; i < (keys-((keys/13)*5)); i++) {
       console.log('drawing white key')
-      drawKey(svg,keyx+(i*keywidth), y, keywidth, height, "white");
+      drawKey(svg,keyx+(i*keywidth), y, keywidth, height, "white", i);
       }
 
-    for(var i = 0; i < ((keys/13)*7); i++) {
-      if( i%7 === 2  || i%7 === 6 ) continue;
+    for(var j = 0; j < ((keys/13)*7); j++) {
+      if( j%7 === 2  || j%7 === 6 ) continue;
+        var k = i+j;
         console.log('drawing black key')
-        drawKey(svg,(keyx+(keywidth*0.75))+(i*keywidth), y, (keywidth/2), height*(3/5), "black");
+        drawKey(svg,(keyx+(keywidth*0.75))+(j*keywidth), y, (keywidth/2), height*(3/5), "black", k);
     }
   }
 
   /*
    Draws a single key with parameters passed by the drawKeyboard function
   */
-  var drawKey = function(svg, x, y, width, height, color) {
+  var drawKey = function(svg, x, y, width, height, color, idNum) {
      var key = svg.rect(x, y, width, height);
           key.attr({
             fill: color,
-                stroke: "#000",
-                strokeWidth: 2
-            });
-/*     if(color = "white") {whiteKeys.push(key);}
-     else {blackKeys.push(key);}
+            stroke: "#000",
+            strokeWidth: 2,
+            id: idNum
+          });
 
-     key.click(clickCallBack);*/
+     key.mousedown(keyPressed);
+     key.mouseup(keyReleased);
   }
 
-  /*Reacts to button presses and calls the supercolider*/
-  var clickCallBack = function(pressCB) {
-    //what do I dooo???
+  /*Reacts to button presses by changing color and calling the supercolider sound method*/
+  var keyPressed = function(event) {
+    var key = event.target;
+    key.attributes.fill.value = "grey";
+    console.log('pressed a key')
+
+    //pressCB(key.attributes.id.value);
+  }
+
+  /*Reacts to button release by reverting color and stopping the supercolider sound method*/
+  var keyReleased = function(event) {
+    var key = event.target;
+    if(key.attributes.id.value <= 7) {
+      key.attributes.fill.value = "white";
+    }
+    else {key.attributes.fill.value = "black";}
+    console.log('released a key')
+    //releaseCB(key.attributes.id.value);
   }
 
 
   var exports = {
     drawKeyboard: drawKeyboard
-    //drawKey: drawKey
   };
 
   return exports;
