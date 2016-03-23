@@ -19,74 +19,112 @@
   <!-- android -->
   <platform name="android">
     <config-file target="res/xml/config.xml" parent="/*">
-      <feature name="SuperCollider Interface">
+      <feature name="supercollider">
         <param name="android-package" value="edu.macalester.comp255.plugins.SuperCollider" />
       </feature>
     </config-file>
     <source-file src="src/android/SuperCollider.java" target-dir="src/edu/macalester/comp255/plugins" />
-    <lib-file src="libs/armeabi/gdbserver" arch="device" />
-    <lib-file src="libs/armeabi/gdb.setup" arch="device" />
-    <lib-file src="libs/armeabi/libAY_UGen.so" arch="device" />
-    <lib-file src="libs/armeabi/libBinaryOpUGens.so" arch="device" />
-    <lib-file src="libs/armeabi/libChaosUGens.so" arch="device" />
-    <lib-file src="libs/armeabi/libcrystax.so" arch="device" />
-    <lib-file src="libs/armeabi/libDelayUGens.so" arch="device" />
-    <lib-file src="libs/armeabi/libDemandUGens.so" arch="device" />
-    <lib-file src="libs/armeabi/libDynNoiseUGens.so" arch="device" />
-    <lib-file src="libs/armeabi/libFFT_UGens.so" arch="device" />
-    <lib-file src="libs/armeabi/libFilterUGens.so" arch="device" />
-    <lib-file src="libs/armeabi/libGendynUGens.so" arch="device" />
-    <lib-file src="libs/armeabi/libgnustl_shared.so" arch="device" />
-    <lib-file src="libs/armeabi/libGrainUGens.so" arch="device" />
-    <lib-file src="libs/armeabi/libIOUGens.so" arch="device" />
-    <lib-file src="libs/armeabi/libLFUGens.so" arch="device" />
-    <lib-file src="libs/armeabi/libMCLDBufferUGens.so" arch="device" />
-    <lib-file src="libs/armeabi/libMCLDFFTUGens.so" arch="device" />
-    <lib-file src="libs/armeabi/libMCLDTreeUGens.so" arch="device" />
-    <lib-file src="libs/armeabi/libMCLDTriggeredStatsUgens.so" arch="device" />
-    <lib-file src="libs/armeabi/libML_UGens.so" arch="device" />
-    <lib-file src="libs/armeabi/libMulAddUGens.so" arch="device" />
-    <lib-file src="libs/armeabi/libNoiseUGens.so" arch="device" />
-    <lib-file src="libs/armeabi/libOscUGens.so" arch="device" />
-    <lib-file src="libs/armeabi/libPanUGens.so" arch="device" />
-    <lib-file src="libs/armeabi/libPhysicalModelingUGens.so" arch="device" />
-    <lib-file src="libs/armeabi/libReverbUGens.so" arch="device" />
-    <lib-file src="libs/armeabi/libscsynth.so" arch="device" />
-    <lib-file src="libs/armeabi/libsndfile.so" arch="device" />
-    <lib-file src="libs/armeabi/libTriggerUGens.so" arch="device" />
-    <lib-file src="libs/armeabi/libUnaryOpUGens.so" arch="device" />
-    <lib-file src="libs/x86/gdbserver" arch="simulator" />
-    <lib-file src="libs/x86/gdb.setup" arch="simulator" />
-    <lib-file src="libs/x86/libAY_UGen.so" arch="simulator" />
-    <lib-file src="libs/x86/libBinaryOpUGens.so" arch="simulator" />
-    <lib-file src="libs/x86/libChaosUGens.so" arch="simulator" />
-    <lib-file src="libs/x86/libcrystax.so" arch="simulator" />
-    <lib-file src="libs/x86/libDelayUGens.so" arch="simulator" />
-    <lib-file src="libs/x86/libDemandUGens.so" arch="simulator" />
-    <lib-file src="libs/x86/libDynNoiseUGens.so" arch="simulator" />
-    <lib-file src="libs/x86/libFFT_UGens.so" arch="simulator" />
-    <lib-file src="libs/x86/libFilterUGens.so" arch="simulator" />
-    <lib-file src="libs/x86/libGendynUGens.so" arch="simulator" />
-    <lib-file src="libs/x86/libgnustl_shared.so" arch="simulator" />
-    <lib-file src="libs/x86/libGrainUGens.so" arch="simulator" />
-    <lib-file src="libs/x86/libIOUGens.so" arch="simulator" />
-    <lib-file src="libs/x86/libLFUGens.so" arch="simulator" />
-    <lib-file src="libs/x86/libMCLDBufferUGens.so" arch="simulator" />
-    <lib-file src="libs/x86/libMCLDFFTUGens.so" arch="simulator" />
-    <lib-file src="libs/x86/libMCLDTreeUGens.so" arch="simulator" />
-    <lib-file src="libs/x86/libMCLDTriggeredStatsUgens.so" arch="simulator" />
-    <lib-file src="libs/x86/libML_UGens.so" arch="simulator" />
-    <lib-file src="libs/x86/libMulAddUGens.so" arch="simulator" />
-    <lib-file src="libs/x86/libNoiseUGens.so" arch="simulator" />
-    <lib-file src="libs/x86/libOscUGens.so" arch="simulator" />
-    <lib-file src="libs/x86/libPanUGens.so" arch="simulator" />
-    <lib-file src="libs/x86/libPhysicalModelingUGens.so" arch="simulator" />
-    <lib-file src="libs/x86/libReverbUGens.so" arch="simulator" />
-    <lib-file src="libs/x86/libscsynth.so" arch="simulator" />
-    <lib-file src="libs/x86/libsndfile.so" arch="simulator" />
-    <lib-file src="libs/x86/libTriggerUGens.so" arch="simulator" />
-    <lib-file src="libs/x86/libUnaryOpUGens.so" arch="simulator" />
 
+    <config-file target="AndroidManifest.xml" parent="/manifest">
+      <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+      <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    </config-file>
+
+    <resource-file src="synthDefs/default.scsyndef" target="assets" />
+
+    <source-file src="libs/armeabi/gdbserver" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/gdb.setup" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libAY_UGen.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libBinaryOpUGens.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libChaosUGens.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libcrystax.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libDelayUGens.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libDemandUGens.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libDynNoiseUGens.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libFFT_UGens.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libFilterUGens.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libGendynUGens.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libgnustl_shared.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libGrainUGens.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libIOUGens.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libLFUGens.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libMCLDBufferUGens.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libMCLDFFTUGens.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libMCLDTreeUGens.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libMCLDTriggeredStatsUgens.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libML_UGens.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libMulAddUGens.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libNoiseUGens.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libOscUGens.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libPanUGens.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libPhysicalModelingUGens.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libReverbUGens.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libscsynth.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libsndfile.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libTriggerUGens.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi/libUnaryOpUGens.so" target-dir="libs/armeabi" />
+    <source-file src="libs/armeabi-v7a/gdbserver" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/gdb.setup" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libAY_UGen.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libBinaryOpUGens.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libChaosUGens.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libcrystax.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libDelayUGens.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libDemandUGens.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libDynNoiseUGens.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libFFT_UGens.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libFilterUGens.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libGendynUGens.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libgnustl_shared.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libGrainUGens.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libIOUGens.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libLFUGens.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libMCLDBufferUGens.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libMCLDFFTUGens.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libMCLDTreeUGens.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libMCLDTriggeredStatsUgens.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libML_UGens.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libMulAddUGens.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libNoiseUGens.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libOscUGens.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libPanUGens.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libPhysicalModelingUGens.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libReverbUGens.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libscsynth.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libsndfile.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libTriggerUGens.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/armeabi-v7a/libUnaryOpUGens.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/x86/gdbserver" target-dir="libs/x86" />
+    <source-file src="libs/x86/gdb.setup" target-dir="libs/x86" />
+    <source-file src="libs/x86/libAY_UGen.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libBinaryOpUGens.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libChaosUGens.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libcrystax.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libDelayUGens.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libDemandUGens.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libDynNoiseUGens.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libFFT_UGens.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libFilterUGens.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libGendynUGens.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libgnustl_shared.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libGrainUGens.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libIOUGens.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libLFUGens.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libMCLDBufferUGens.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libMCLDFFTUGens.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libMCLDTreeUGens.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libMCLDTriggeredStatsUgens.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libML_UGens.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libMulAddUGens.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libNoiseUGens.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libOscUGens.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libPanUGens.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libPhysicalModelingUGens.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libReverbUGens.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libscsynth.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libsndfile.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libTriggerUGens.so" target-dir="libs/x86" />
+    <source-file src="libs/x86/libUnaryOpUGens.so" target-dir="libs/x86" />
   </platform>
 
 
