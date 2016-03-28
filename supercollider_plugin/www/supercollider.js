@@ -1,12 +1,12 @@
+console.log('code executing')
+
 module.exports = {
-  playNote: function(frequency, duration) {
+  playNote: function(frequency, duration, successCallback) {
     cordova.exec(
       successCallback,
       null,
-      "SuperCollider",
-      "playNote"
+      "supercollider",
+      "playNote",
       [frequency, duration]);
   }
 };
-
-/* SuperCollder.playNote('440', '1.5')
