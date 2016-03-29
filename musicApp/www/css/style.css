@@ -8,8 +8,8 @@
 As you can tell by my naming, these are great ideas.
  */
 
- /*.background, .background .pane, .background .item, .background .item-complex .item-content {
-    background-color: #171717; */
+ .background, .background .pane/*, .background .item, .background .item-complex .item-content*/ {
+    background-color: #171717;
 }
 /*Commenting this out does not bring the keyboard back to life :(*/
 
