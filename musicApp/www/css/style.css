@@ -1,1 +1,15 @@
-/* Empty. Add your own CSS if you like */
+/* The pages should all have similar color schemes so maybe this would be a good idea?? */
+
+/*colors to base stuff on:
+ The limiest of lime: #1AFF00
+ Straight-up Violet: #8000FF
+ Yellow like burning: #F2FF00
+ Like a really dark grey: #171717
+As you can tell by my naming, these are great ideas.
+ */
+
+ .background, .background .pane/*, .background .item, .background .item-complex .item-content*/ {
+    background-color: #171717;
+}
+/*Commenting this out does not bring the keyboard back to life :(*/
+

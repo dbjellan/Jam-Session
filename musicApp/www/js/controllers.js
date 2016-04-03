@@ -1,5 +1,6 @@
 angular.module('starter.controllers', [])
 
+
 .controller('InstrumentCtrl', function($scope) {
   var s = Snap("#keyboard")
   var keyboard = new Instruments.Keyboard(24)
