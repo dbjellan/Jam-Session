@@ -1,5 +1,10 @@
 angular.module('starter.controllers', [])
 
+.controller('MainCtrl', function($scope, $ionicSideMenuDelegate) {
+  $scope.toggleLeft = function(){
+    $ionicSideMenuDelegate.toggleLeft();
+  }
+})
 
 .controller('InstrumentCtrl', function($scope) {
   var s = Snap("#keyboard");

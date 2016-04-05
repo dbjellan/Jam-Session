@@ -2,7 +2,6 @@ var Drawing = (function() {
 
 /*
 Draws a keyboard out of svg vector rectangles, position (x,y), and TOTAL size width*height with keys keys.
-TODO: pass the callback functions to the correct methods, uncomment the lines that call them
 */
   var drawKeyboard = function(svg, x, y, width, height, keys, pressCB, releaseCB) {
   //Avoids a case where the number of keys is undefined
