@@ -1,0 +1,6 @@
+musicApp/node_modules/
+musicApp/platforms/
+musicApp/plugins/
+musicApp/resources/
+musicApp/www/lib
+.idea

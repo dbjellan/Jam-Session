@@ -1,33 +1,55 @@
 var Drawing = (function() {
-
 /*
 Draws a keyboard out of svg vector rectangles, position (x,y), and TOTAL size width*height with keys keys.
+TODO: deal with multitouch??
 */
-  var drawKeyboard = function(svg, x, y, width, height, keys, pressCB, releaseCB) {
-  //Avoids a case where the number of keys is undefined
-    if (!keys) {
-      keys = 13;
-    }
+  var KeyboardUI = function(svg, x, y, width, height, keys, pressCB, releaseCB) {
+    this.height = height
+    this.width = width
 
-    var keywidth = width/keys;
-    var keyx = 30;
-    whiteKeys = []; //both of these arrays are global to reach the drawKeys function
-    blackKeys = []; //this could be dangerous- how do you global only within a file again?
+    //sets defaults if arguments not passed in
+    this.keys = keys ? keys : 24
+    this.pressCB = pressCB ? pressCB : console.log
+    this.releaseCB = releaseCB ? releaseCB : console.log
 
-    console.log('drawing keyboard')
+    this.keywidth = width/keys;
 
-     for (var i = 0; i < (keys-((keys/13)*5)); i++) {
+    this.blackKeyBuffer = []
+
+    console.log('drawing keyboard with ' + this.keys + ' keys');
+
+    var drawnKeys = 0;
+    var i = 0;
+    while(drawnKeys < keys) {
       console.log('drawing white key')
-      drawKey(svg,keyx+(i*keywidth), y, keywidth, height, "white", i);
-      }
-
-    for(var j = 0; j < ((keys/13)*7); j++) {
-      if( j%7 === 2  || j%7 === 6 ) continue;
-        var k = i+j;
+      this.drawWhiteKey(svg, i*this.keywidth, y, drawnKeys);
+      drawnKeys++;
+      if (i%7 !== 2  && i%7 !== 6) {
         console.log('drawing black key')
-        drawKey(svg,(keyx+(keywidth*0.75))+(j*keywidth), y, (keywidth/2), height*(3/5), "black", k);
+        //add black key to be drawn after white keys so drawn on top
+        this.addBlackKey(svg,this.keywidth*0.75+(i*this.keywidth), y, drawnKeys);
+        drawnKeys++;
+      }
+      i++;
+    }
+    this.drawBlackKeys()
+  }
+
+  var addBlackKey = function(svg, x, y, id) {
+    this.blackKeyBuffer.push(this.drawKey.bind(this, svg, x, y, this.keywidth/2, this.height*(3/5), "black", id));
+  }
+  KeyboardUI.prototype.addBlackKey = addBlackKey;
+
+  KeyboardUI.prototype.drawBlackKeys = function() {
+    for (var i = 0; i < this.blackKeyBuffer.length; i++) {
+      this.blackKeyBuffer[i]()
     }
   }
+
+  var drawWhiteKey = function(svg, x, y, id) {
+    this.drawKey(svg, x, y, this.keywidth, this.height, "white", id);
+  }
+  KeyboardUI.prototype.drawWhiteKey = drawWhiteKey;
 
   /*
    Draws a single key with parameters passed by the drawKeyboard function
@@ -38,36 +60,40 @@ Draws a keyboard out of svg vector rectangles, position (x,y), and TOTAL size wi
             fill: color,
             stroke: "#000",
             strokeWidth: 2,
-            id: idNum
+            id: idNum,
           });
 
-     key.mousedown(keyPressed);
-     key.mouseup(keyReleased);
-  }
+    var pressCB = this.pressCB;
+    var releaseCB = this.releaseCB;
 
-  /*Reacts to button presses by changing color and calling the supercolider sound method*/
-  var keyPressed = function(event) {
-    var key = event.target;
-    key.attributes.fill.value = "grey";
-    console.log('pressed a key')
-
-    //pressCB(key.attributes.id.value);
-  }
-
-  /*Reacts to button release by reverting color and stopping the supercolider sound method*/
-  var keyReleased = function(event) {
-    var key = event.target;
-    if(key.attributes.id.value <= 7) {
-      key.attributes.fill.value = "white";
+    /*Reacts to button presses by changing color and calling the supercolider sound method*/
+    var keyPressed = function(event) {
+      var key = event.target;
+      key.attributes.fill.value = "grey";
+      console.log('pressed key #' + key.attributes.id.value)
+      pressCB(key.attributes.id.value);
     }
-    else {key.attributes.fill.value = "black";}
-    console.log('released a key')
-    //releaseCB(key.attributes.id.value);
+
+    /*Reacts to button release by reverting color and stopping the supercolider sound method*/
+    var keyReleased = function(event) {
+      var targetKey = event.target;
+      console.log(targetKey.inactiveColor)
+      targetKey.attributes.fill.value = color;
+      console.log('released Key #' + targetKey.attributes.id.value)
+      releaseCB(targetKey.attributes.id.value);
+    }
+
+    //TODO: check if bind is needed here
+    key.mousedown(keyPressed);
+    key.mouseover(keyReleased);
+    key.mouseup(keyReleased);
   }
+
+  KeyboardUI.prototype.drawKey = drawKey;
 
 
   var exports = {
-    drawKeyboard: drawKeyboard
+    KeyboardUI: KeyboardUI
   };
 
   return exports;

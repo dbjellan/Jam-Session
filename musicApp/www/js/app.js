@@ -20,8 +20,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
-    console.log('trying to run native code')
-    supercollider.playNote(1, 1, function() { console.log("successfully ran native code")});
   });
 })
 
