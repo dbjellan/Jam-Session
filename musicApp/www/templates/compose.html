@@ -1,11 +1,20 @@
-<canvas id="myCanvas" width="200" height="100"
-        style="border:1px solid #c3c3c3;">
-  Your browser does not support the canvas element.
-</canvas>
+<div class="bar bar-header bar-dark">
+  <button class="button icon ion-navicon button-light"></button>
+  <h1 class="title">sequencer</h1>
+</div>
 
-<script>
-var canvas = document.getElementById("myCanvas");
-var ctx = canvas.getContext("2d");
-ctx.fillStyle = "#FF0000";
-ctx.fillRect(0,0,150,75);
-</script>
+<ion-content class="has-header">
+
+  <div class="row">
+    <div class="col">mute</div>
+    <div class="col">left</div>
+    <div class="col">right</div>
+    <div class="col">volume</div>
+
+  </div>
+  <div class="row row-center">
+    <svg id="sequencerUI">
+    </svg>
+  </div>
+
+</ion-content>

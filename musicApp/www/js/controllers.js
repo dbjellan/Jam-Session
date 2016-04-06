@@ -9,5 +9,13 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ComposeCtrl', function($scope) {
-
+  var s = Snap("#sequencerUI");
+  var sequencer = new Drawing.SequencerUI();
+  var boundary = s.rect(20, 0, 400, 100);
+  boundary.attr({
+    fill: "yellow",
+    stroke: "#000",
+    strokeWidth: 2
+  })
+  //sequencer.drawUI(s, 4)
 })
