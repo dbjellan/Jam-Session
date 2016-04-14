@@ -31,23 +31,38 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   // Each state's controller can be found in controllers.js
   $stateProvider
 
-  // setup an abstract state for the tabs directive
-    .state('instrument', {
-    url: '/instrument',
-    templateUrl: 'templates/instrument.html',
-    controller: 'InstrumentCtrl'
+  //the slide menu
+  .state('app', {
+  url: '/app',
+  abstract: true,
+  templateUrl: 'templates/menu.html',
+  controller: 'MainCtrl'
   })
 
-  // Each tab has its own nav history stack:
+  // setup an abstract state for the tabs directive
+    .state('app.instrument', {
+    url: '/instrument',
+    views:{
+      'menuContent': {
+        templateUrl: 'templates/instrument.html',
+        controller: 'InstrumentCtrl'
+      }
+    }
+  })
 
-  .state('compose', {
+
+  .state('app.compose', {
     url: '/compose',
-    templateUrl: 'templates/compose.html',
-    controller: 'ComposeCtrl'
+    views:{
+     'menuContent': {
+      templateUrl: 'templates/compose.html',
+       controller: 'ComposeCtrl'
+      }
+    }
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/instrument');
+  $urlRouterProvider.otherwise('/app/instrument');
 
 
 });
