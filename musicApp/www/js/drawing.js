@@ -35,10 +35,9 @@ TODO: deal with multitouch??
     this.drawBlackKeys()
   }
 
-  var addBlackKey = function(svg, x, y, id) {
+  KeyboardUI.prototype.addBlackKey = function(svg, x, y, id) {
     this.blackKeyBuffer.push(this.drawKey.bind(this, svg, x, y, this.keywidth/2, this.height*(3/5), "black", id));
   }
-  KeyboardUI.prototype.addBlackKey = addBlackKey;
 
   KeyboardUI.prototype.drawBlackKeys = function() {
     for (var i = 0; i < this.blackKeyBuffer.length; i++) {
@@ -46,22 +45,21 @@ TODO: deal with multitouch??
     }
   }
 
-  var drawWhiteKey = function(svg, x, y, id) {
+  KeyboardUI.prototype.drawWhiteKey = function(svg, x, y, id) {
     this.drawKey(svg, x, y, this.keywidth, this.height, "white", id);
   }
-  KeyboardUI.prototype.drawWhiteKey = drawWhiteKey;
 
   /*
    Draws a single key with parameters passed by the drawKeyboard function
   */
   var drawKey = function(svg, x, y, width, height, color, idNum) {
-     var key = svg.rect(x, y, width, height);
-          key.attr({
-            fill: color,
-            stroke: "#000",
-            strokeWidth: 2,
-            id: idNum,
-          });
+    var key = svg.rect(x, y, width, height);
+      key.attr({
+        fill: color,
+        stroke: "#000",
+        strokeWidth: 2,
+        id: idNum,
+      });
 
     var pressCB = this.pressCB;
     var releaseCB = this.releaseCB;

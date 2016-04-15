@@ -4,7 +4,7 @@
         version="0.0.1">
 
   <name>supercollider</name>
-  <description>A Cordova plugin that displays an alert popup dialog</description>
+  <description>A Cordova plugin that provides a copy of the supercollider audio generation server and an interface to send it messages.</description>
 
   <engines>
     <engine name="cordova" version=">=3.6.0" />
