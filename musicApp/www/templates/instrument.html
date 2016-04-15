@@ -1,43 +1,42 @@
-<!-- Make a 2x1 table, put buttons in the top one, instrument in the bottom one -->
+<ion-view title="Instrument">
 
-<div class="bar bar-header bar-dark">
-  <button class="button icon ion-navicon button-light"></button> <!-- I'd like to change all the light elements to stable ones, but the checkbox isn't working -->
-</div>
+  <!-- If you want to look at the sidemenu, paste the code above the ion-nav-view in idex here -->
 
-<ion-content class="has-header">
-<div class="row">
-  <div class="col col-35">
-    <div class="row row-center">
-      <button class="button icon-left ion-record button-assertive"></button>
-      <!-- Turn this to ion-stop when pressed?? -->
+  <ion-content class="has-header">
+    <div class="row">
+      <div class="col col-35">
+        <div class="row row-center">
+          <button class="button icon-left ion-record button-assertive"></button>
+          <!-- Turn this to ion-stop when pressed?? -->
+        </div>
+        <div class="row">
+          <ion-checkbox ng-model="filter.red" class="checkbox">Metronome</ion-checkbox>
+          <!-- Adjust size to make this smaller -->
+        </div>
       </div>
-    <div class="row">
-      <ion-checkbox ng-model="filter.red" class="checkbox">Metronome</ion-checkbox>
-      <!-- Adjust size to make this smaller -->
+      <div class="col col-30">
+        <div class="row">
+          <label class="item item-input item-light">
+            <span class="input-label">Loop Len</span>
+            <input type="text">
+          </label>
+        </div>
+        <div class="row">
+          <label class="item item-input item-light">
+            <span class="input-label">BPM</span>
+            <input type="text">
+          </label>
+        </div>
+      </div>
+      <div class="col col-center col-35"><button class="button icon-left ion-play button-balanced"></button></div>
     </div>
-  </div>
-  <div class="col col-30">
     <div class="row">
-      <label class="item item-input item-light">
-        <span class="input-label">Loop Len</span>
-        <input type="text">
-      </label>
+      <div class="col col-center">
+        <svg id="keyboard"></svg>
+      </div>
     </div>
-    <div class="row">
-      <label class="item item-input item-light">
-        <span class="input-label">BPM</span>
-        <input type="text">
-      </label>
-    </div>
-  </div>
-  <div class="col col-center col-35"><button class="button icon-left ion-play button-balanced"></button></div>
-</div>
-<div class="row row-center">
-  <svg id="keyboard">
-    <!--Is anything supposed to go in here??? -->
-  </svg>
-</div>
-</ion-content>
+  </ion-content>
+</ion-view>
 
 
 
