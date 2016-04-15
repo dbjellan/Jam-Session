@@ -92,19 +92,26 @@ TODO: deal with multitouch??
   KeyboardUI.prototype.drawKey = drawKey;
 
 
+  var SequencerUI = function(svg, x, y, width, height, tracks) {
+    var numVisibleTracks = 4;
 
-  var SequencerUI = function(numTracks) {
-    this.numTracks = 4;
-  }
+    var canvasWidth = width;
+    var canvasHeight = height;
+    var trackHeight = canvasHeight/numVisibleTracks;
+    this.drawTracks(svg, tracks, numVisibleTracks, canvasWidth, trackHeight)
+  };
 
-  SequencerUI.prototype.drawUI = function(svg, numTracks) {
-    thisobj = this
-    this.ui = new Drawing.SequencerUI(svg, numTracks)
-  }
+  SequencerUI.prototype.drawTracks = function(svg, tracks, numVisibleTracks, trackWidth, trackHeight) {
+    this.numVisibleTracks = 5;
+    for(var i = 0; i<this.numVisibleTracks; i++) {
+      svg.rect(0, trackHeight * i, trackWidth, trackHeight).attr({
+        fill: "#808080",
+        stroke: "black",
+        strokeWidth: 2
+      })
+    }
+  };
 
-  SequencerUI.prototype.addTrack = function() {
-
-  }
 
   var exports = {
     KeyboardUI: KeyboardUI,

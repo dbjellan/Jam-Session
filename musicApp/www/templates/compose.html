@@ -3,18 +3,25 @@
   <h1 class="title">sequencer</h1>
 </div>
 
-<ion-content class="has-header">
-
-  <div class="row">
+<ion-content class="has-header" scroll="false">
+  <!--<label class="toggle toggle-assertive">-->
+    <!--<input type="checkbox">-->
+    <!--<div class="track">-->
+      <!--<div class="handle"></div>-->
+    <!--</div>-->
+  <!--</label>-->
+  <div class="row" style="color:white">
     <div class="col">mute</div>
     <div class="col">left</div>
     <div class="col">right</div>
     <div class="col">volume</div>
 
   </div>
-  <div class="row row-center">
-    <svg id="sequencerUI">
-    </svg>
+  <div class="row" style="height:100%">
+    <div class="col" style="border:1px white">
+      <svg id="sequencer" style="width:100%; height:250px">
+      </svg>
+    </div>
   </div>
 
 </ion-content>
