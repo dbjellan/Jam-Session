@@ -29,5 +29,10 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ComposeCtrl', function($scope) {
-
+  var s = Snap("#sequencer");
+  var sequencer = new Sequencer.Sequencer();
+  sequencer.drawUI(s, 0, 0, 620, 250)
 })
+
+
+.controller()
