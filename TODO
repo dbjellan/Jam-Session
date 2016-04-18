@@ -1,4 +1,7 @@
-Supercollider Plugin:
-Resolve audio lag (hopefully by running on separate thread?).
-Get compilation of synthdefs working.
-Sensible way of installing new synthdefs
+
+-Supercollider file copy bug
+-Add test for calling supercollider in browser
+-Size+place keyboard reasonably
+-make instrument controller bar pretty
+-write recorder class
+-write instrument controller class
