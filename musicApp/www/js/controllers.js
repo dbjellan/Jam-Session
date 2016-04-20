@@ -24,7 +24,10 @@ angular.module('starter.controllers', [])
 .controller('InstrumentCtrl', function($scope) {
   var s = Snap("#keyboard")
   var keyboard = new Instruments.Keyboard(24)
-  keyboard.drawUI(s, 30, 50, 500, 80)
+  width = Math.min(window.innerWidth *.8);
+  leftmargin = (window.innerWidth-width)/2
+  keyboard.drawUI(s, 0, 0, width, 150)
+  $('#keyboard').css({'margin-left': leftmargin, 'width': width})
   $scope.keyboard = keyboard
 })
 

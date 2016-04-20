@@ -12,3 +12,13 @@ As you can tell by my naming, these are great ideas.
     background-color: #171717;
 }
 
+.controller-container {
+  width:80%;
+  margin-left:10%;
+  background-color:white;
+  margin-right:10%;
+  padding:20px;
+  margin-top:15px;
+  margin-bottom:15px;
+  border-radius:4px;
+}
