@@ -28,11 +28,20 @@ angular.module('starter.controllers', [])
   $scope.keyboard = keyboard
 })
 
-.controller('ComposeCtrl', function($scope) {
+.controller('ComposeCtrl', function($scope, $ionicPosition) {
+  var seqAttr = angular.element(document.querySelector('#sequencer'));
+  //$('#sequencer').setAttribute('height', "500");
+  seqAttr.attr('height', "100%");
+  seqAttr.attr('width', "100px");
   var s = Snap("#sequencer");
   var sequencer = new Sequencer.Sequencer();
-  sequencer.drawUI(s, 0, 0, 620, 250)
-})
+  //var viewBox = s.attr("viewBox");
+  //alert($ionicPosition.position(seqAttr));
+  console.log($ionicPosition.position(seqAttr).top)
+  sequencer.drawUI(s, 0, 0, 300, 20);
+  //console.log(window.innerHeight)
+  //$('#sequencer').setAttribute('height', 500);
+});
 
 
-.controller()
+  //.controller()
