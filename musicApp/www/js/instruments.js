@@ -4,6 +4,24 @@ var Instruments = (function() {
 
   }
 
+  var InstrumentRecorder = function(instrumentConstructor) {
+    this.startTime = false
+    this.instrumentConstructor = instrumentConstructor
+    this.recording = []
+
+  }
+
+  InstrumentRecorder.prototype.startRecording = function() {
+    if (! this.startTime) {
+      this.startTime = new Date()
+    }
+  }
+
+  InstrumentRecorder.prototype.getRecording = function() {
+
+  }
+
+
   //keyboard instrument with
   var Keyboard = function(numKeys, startingKey) {
     this.numKeys = numKeys ? numKeys : 24
@@ -21,18 +39,20 @@ var Instruments = (function() {
         gate: 0
       }
       var thisobj = this;
-      (function(){
-        //copy variables into new closures to not overwritten on as loop iterates
-        var j = i;
-        var thisargs = args;
-        ionic.Platform.ready(function() {
-          console.log("creating synth:" + JSON.stringify(thisargs))
-          supercollider.createSynth("pianoKey", thisargs, function(synthID) {
-            console.log("registered synthID: " + synthID + " associated with key " + j)
-            thisobj.synths[j] = synthID
-          })
-         })
-       })();
+      if (ionic.Platform.isAndroid()) {
+        (function(){
+          //copy variables into new closures to not overwritten on as loop iterates
+          var j = i;
+          var thisargs = args;
+          ionic.Platform.ready(function() {
+            console.log("creating synth:" + JSON.stringify(thisargs))
+            supercollider.createSynth("pianoKey", thisargs, function(synthID) {
+              console.log("registered synthID: " + synthID + " associated with key " + j)
+              thisobj.synths[j] = synthID
+            })
+           })
+         })();
+       }
     }
   }
 
@@ -44,7 +64,8 @@ var Instruments = (function() {
       if (id in thisobj.synths) {
         console.log("sending key press message to synth " + thisobj.synths[id])
         var synthID = thisobj.synths[id]
-        supercollider.setArgs(synthID, {gate: 1})
+        if (ionic.Platform.isAndroid())
+          supercollider.setArgs(synthID, {gate: 1})
       }
     }
 
@@ -52,7 +73,8 @@ var Instruments = (function() {
       if (id in thisobj.synths) {
         console.log("sending key release message to synth " + thisobj.synths[id])
         var synthID = thisobj.synths[id]
-        supercollider.setArgs(synthID, {gate: 0})
+        if (ionic.Platform.isAndroid())
+          supercollider.setArgs(synthID, {gate: 0})
       }
     }
 

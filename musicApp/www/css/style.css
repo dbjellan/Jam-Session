@@ -12,6 +12,7 @@ As you can tell by my naming, these are great ideas.
     background-color: #171717;
 }
 
+
 /*allows div rows to fill remaining vertical space using percentages, based on height of sibling
 rows rather than the container as a whole
 http://stackoverflow.com/questions/27685149/equal-height-flex-row-not-working
@@ -22,6 +23,14 @@ http://stackoverflow.com/questions/27685149/equal-height-flex-row-not-working
   height: 100%;
 }
 
-/*.scroll {*/
-  /*height: 100%;*/
-/*}*/
+.controller-container {
+  width:80%;
+  margin-left:10%;
+  background-color:white;
+  margin-right:10%;
+  padding:20px;
+  margin-top:15px;
+  margin-bottom:15px;
+  border-radius:4px;
+}
+

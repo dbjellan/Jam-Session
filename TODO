@@ -1,7 +1,8 @@
-
 -Supercollider file copy bug
--Add test for calling supercollider in browser
+XAdd test for calling supercollider in browser
 -Size+place keyboard reasonably
--make instrument controller bar pretty
+-add placeholder text in music controller
+
+
 -write recorder class
 -write instrument controller class

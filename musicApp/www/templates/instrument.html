@@ -4,31 +4,41 @@
 
   <ion-content class="has-header">
     <div class="row">
-      <div class="row" style="width:80%;margin-left:20%;background-color:white;margin-right:20%">
+      <div class="row controller-container">
 
         <div class="col">
-            <button class="button icon-left ion-record button-assertive"></button>
+          <div class="button-bar">
+            <button class="button icon ion-record button-assertive"></button>
             <!-- Turn this to ion-stop when pressed?? -->
-            <button class="button icon-left ion-play button-balanced"></button>
+            <!-- Turn this to ion-stop when pressed?? -->
+            <button class="button icon ion-play button-balanced"></button>
+          </div>
         </div>
-
         <div class="col">
-          <div class="row">
+          <div>
             <label class="item item-input item-light">
               <span class="input-label">Loop Len</span>
               <input type="text">
             </label>
           </div>
-          <div class="row">
-            <label class="item item-input item-light">
-              <span class="input-label">BPM</span>
-              <input type="text">
-            </label>
-          </div>
+        </div>
+        <div class="col">
+          <label class="item item-input item-light">
+            <span class="input-label">Beats per Minute</span>
+            <input type="text">
+          </label>
         </div>
 
         <div class="col">
-          <ion-checkbox ng-model="filter.red" class="checkbox">Metronome</ion-checkbox>
+          <div class="item item-input item-light">
+            <span class="input-label">Play Metronome</span>
+            <label class="toggle toggle-assertive">
+              <input type="checkbox">
+              <div class="track">
+                <div class="handle"></div>
+              </div>
+            </label>
+          </div>
         </div>
       </div>
 
