@@ -4,6 +4,24 @@ var Instruments = (function() {
 
   }
 
+  var InstrumentRecorder = function(instrumentConstructor) {
+    this.startTime = false
+    this.instrumentConstructor = instrumentConstructor
+    this.recording = []
+
+  }
+
+  InstrumentRecorder.prototype.startRecording = function() {
+    if (! this.startTime) {
+      this.startTime = new Date()
+    }
+  }
+
+  InstrumentRecorder.prototype.getRecording = function() {
+
+  }
+
+
   //keyboard instrument with
   var Keyboard = function(numKeys, startingKey) {
     this.numKeys = numKeys ? numKeys : 24
