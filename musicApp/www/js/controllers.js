@@ -21,7 +21,7 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('InstrumentCtrl', function($scope) {
+.controller('InstrumentCtrl', function($scope, $ionicPopup) {
   var s = Snap("#keyboard")
   var keyboard = new Instruments.Keyboard(24)
   width = Math.min(window.innerWidth *.8);
@@ -29,6 +29,45 @@ angular.module('starter.controllers', [])
   keyboard.drawUI(s, 0, 0, width, 150)
   $('#keyboard').css({'margin-left': leftmargin, 'width': width})
   $scope.keyboard = keyboard
+
+  $scope.record = function() {
+     //Record the keyboard until the button is clicked again (seperate method?)
+  }
+
+  $scope.play = function() {
+     //Play uncommitted track, if there is one. If no tracks have been recorded/all tracks have been committed, do nothing.
+  }
+
+  $scope.showConfirm = function() {
+    //TODO: If the Add Track button is active (there is an uncommitted track)
+        var confirmPopup = $ionicPopup.confirm({
+           title: 'Are you sure?',
+           template: 'If you record without adding your previous recorded track, it will be overwritten. Is that okay?'
+        });
+
+        confirmPopup.then(function(res) {
+           if(res) {
+              //record as normal
+              console.log('Overwritten');
+           } else {
+              //TODO: Stop button from changing! Stop it from calling the record function!!
+              console.log('Not recording');
+           }
+        });
+
+     };
+
+
+  //These may not be used if the BPM values stay hard-coded
+  this.numbers1 = new Array();
+  for (var i = 1; i <= 119; i++) {
+    this.numbers1.push(i);
+  }
+
+  this.numbers2 = new Array();
+    for (var i = 121; i <= 240; i++) {
+      this.numbers1.push(i);
+    }
 })
 
 .controller('ComposeCtrl', function($scope) {
