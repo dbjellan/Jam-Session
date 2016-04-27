@@ -23,12 +23,27 @@ angular.module('starter.controllers', [])
 
 .controller('InstrumentCtrl', function($scope) {
   var s = Snap("#keyboard")
-  var keyboard = new Instruments.Keyboard(24)
-  width = Math.min(window.innerWidth *.8);
-  leftmargin = (window.innerWidth-width)/2
+  var instrumentRecorder = new Instruments.InstrumentRecorder(Instruments.Keyboard.bind(null, 36))
+  var keyboard = new Instruments.Keyboard(36, instrumentRecorder)
+
+  //width = Math.min(window.innerWidth *.8);
+  //leftmargin = (window.innerWidth-width)/2
+  width = $("#keyboard-container").width()
   keyboard.drawUI(s, 0, 0, width, 150)
-  $('#keyboard').css({'margin-left': leftmargin, 'width': width})
+  $('#keyboard').css({'width': width})
+
+  $scope.instrumentRecorder = instrumentRecorder
   $scope.keyboard = keyboard
+  $scope.play = function() {
+    var recording = $scope.instrumentRecorder.getRecording()
+
+  }
+  $scope.record = function() {
+    $scope.instrumentRecorder.startRecording()
+  }
+  $scope.done = function() {
+
+  }
 })
 
 .controller('ComposeCtrl', function($scope) {

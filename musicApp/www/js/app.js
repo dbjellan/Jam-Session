@@ -65,4 +65,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   $urlRouterProvider.otherwise('/app/instrument');
 
 
+})
+
+.factory("ClipProvider", function() {
+  var instance = {}
+  return instance
 });

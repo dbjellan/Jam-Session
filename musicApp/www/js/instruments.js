@@ -5,9 +5,9 @@ var Instruments = (function() {
   }
 
   var InstrumentRecorder = function(instrumentConstructor) {
-    this.startTime = false
+    this.startTime = null
     this.instrumentConstructor = instrumentConstructor
-    this.recording = []
+    this.clip = []
 
   }
 
@@ -18,14 +18,69 @@ var Instruments = (function() {
   }
 
   InstrumentRecorder.prototype.getRecording = function() {
+    if (this.duration) {
+      var recordingObj = {
+        instrumentConstructor: this.instrumentConstructor,
+        data: this.clip,
+        duration: this.duration
+      }
+      return recordingObj
+     }
+  }
+
+  InstrumentRecorder.prototype.stopRecording = function() {
+    if (this.startTime) {
+      this.duration = new Date() - this.startTime
+      return this.getRecording()
+    }
+  }
+
+  InstrumentRecorder.prototype.recordAction = function(actionCB) {
+    if (this.startTime) {
+      var time = new Date() - this.startTime
+      this.clip.push([time, actionCB])
+    }
+  }
+
+  var Loop = function(clip) {
+    this.clip = clip
+    this.numLoops = 1
+  }
+
+  Loop.prototype.setNumLoops = function(n) {
+    this.numLoops = n
+  }
+
+  Loop.prototype.play = function() {
+    var instrument = new this.clip.instrumentConstructor()
+    for (var i = 0; i < this.clip.data.length; i++) {
+      this.recording.data[i].bind(instrument)
+    }
+    this.startTime = new Date()
+    this.actionIndex = 0
+    window.setInterval(this._play.bind(this), 50)
 
   }
 
+  Loop.prototype._play = function() {
+    var time = new Date() - this.startTime
+    while(this.recording.data[this.actionIndex][0] < time) {
+      this.recording.data[this.actionIndex][1]()
+      this.actionIndex++
+    }
+  }
+
+  var Sequencer = function() {
+
+  }
 
   //keyboard instrument with
-  var Keyboard = function(numKeys, startingKey) {
-    this.numKeys = numKeys ? numKeys : 24
-    this.startingKey = startingKey ? startingKey : 49
+  var Keyboard = function(numKeys, startingKey, instrumentRecorder) {
+    var defaultKeys = 24
+    var defaultStartingKey = 49
+    this.numKeys = numKeys ? numKeys : defaultKeys
+    this.startingKey = startingKey ? startingKey : defaultStartingKey
+    this.instrumentRecorder = instrumentRecorder
     this.synths = {}
     for (var i = 0; i < this.numKeys; i++) {
       var frequency = Math.pow(2, (i+this.startingKey-49)/12.0)*440
@@ -66,6 +121,9 @@ var Instruments = (function() {
         var synthID = thisobj.synths[id]
         if (ionic.Platform.isAndroid())
           supercollider.setArgs(synthID, {gate: 1})
+        if (thisobj.instrumentRecorder) {
+          thisobj.instrumentRecorder.recordAction(keyPressed.bind(thisobj, id))
+        }
       }
     }
 
@@ -75,6 +133,9 @@ var Instruments = (function() {
         var synthID = thisobj.synths[id]
         if (ionic.Platform.isAndroid())
           supercollider.setArgs(synthID, {gate: 0})
+        if (thisobj.instrumentRecorder) {
+          thisobj.instrumentRecorder.recordAction(keyReleased.bind(undefined, id))
+        }
       }
     }
 
@@ -82,7 +143,8 @@ var Instruments = (function() {
   }
 
   var exports = {
-    Keyboard: Keyboard
+    Keyboard: Keyboard,
+    InstrumentRecorder: InstrumentRecorder
   }
 
   return exports
