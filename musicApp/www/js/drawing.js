@@ -12,7 +12,8 @@ TODO: deal with multitouch??
     this.pressCB = pressCB ? pressCB : console.log
     this.releaseCB = releaseCB ? releaseCB : console.log
 
-    this.keywidth = width/keys;
+    var whiteKeys = Math.floor(keys/12)*7 //only correct for even number of octaves
+    this.keywidth = width/whiteKeys;
 
     this.blackKeyBuffer = []
 
@@ -75,7 +76,6 @@ TODO: deal with multitouch??
     /*Reacts to button release by reverting color and stopping the supercolider sound method*/
     var keyReleased = function(event) {
       var targetKey = event.target;
-      console.log(targetKey.inactiveColor)
       targetKey.attributes.fill.value = color;
       console.log('released Key #' + targetKey.attributes.id.value)
       releaseCB(targetKey.attributes.id.value);

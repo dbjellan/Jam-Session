@@ -1,14 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('MainCtrl', function($scope) { //can add , $ionicSideMenuDelegate to revert
-  //consider using ionicModal for the confirm for recording a song +
-  //in which case, edit according to the slidemenu template app
-
-/*  //I don't know that this is neccessary anymore
-  $scope.toggleLeft = function(){
-    $ionicSideMenuDelegate.toggleLeft();
-  }*/
-
+.controller('MainCtrl', function($scope) {
   //For the sidemenu. I believe this is the right place to put it?
   $scope.save = function(){
     //this will be able to save a song
@@ -23,11 +15,16 @@ angular.module('starter.controllers', [])
 
 .controller('InstrumentCtrl', function($scope, $ionicPopup) {
   var s = Snap("#keyboard")
-  var keyboard = new Instruments.Keyboard(24)
-  width = Math.min(window.innerWidth *.8);
-  leftmargin = (window.innerWidth-width)/2
+  var instrumentRecorder = new Instruments.InstrumentRecorder(Instruments.Keyboard.bind(null, 36))
+  var keyboard = new Instruments.Keyboard(36, instrumentRecorder)
+
+  //width = Math.min(window.innerWidth *.8);
+  //leftmargin = (window.innerWidth-width)/2
+  width = $("#keyboard-container").width()
   keyboard.drawUI(s, 0, 0, width, 150)
-  $('#keyboard').css({'margin-left': leftmargin, 'width': width})
+  $('#keyboard').css({'width': width})
+
+  $scope.instrumentRecorder = instrumentRecorder
   $scope.keyboard = keyboard
 
 
@@ -40,13 +37,15 @@ angular.module('starter.controllers', [])
    }
 
   $scope.record = function() {
-     //Record the keyboard until the button is clicked again (seperate method?)
-     console.log('recording');
+    //Record the keyboard until the button is clicked again (seperate method?)
+    $scope.instrumentRecorder.startRecording()
   }
+
+  $scope.done = function() {}
 
   $scope.play = function() {
      //Play uncommitted track, if there is one. If no tracks have been recorded/all tracks have been committed, do nothing.
-     console.log('playing');
+     var recording = $scope.instrumentRecorder.getRecording()
   }
 
   $scope.showConfirm = function() {
@@ -90,6 +89,7 @@ angular.module('starter.controllers', [])
     for (var i = 121; i <= 240; i++) {
       this.numbers1.push(i);
     }
+
 })
 
 
