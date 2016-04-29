@@ -30,12 +30,23 @@ angular.module('starter.controllers', [])
   $('#keyboard').css({'margin-left': leftmargin, 'width': width})
   $scope.keyboard = keyboard
 
+
+  $scope.recordLogic = function() {
+    //??? If recording, then stop recording, turn button to record
+    //If hasTrack,
+    showConfirm();
+    //If !hasTrack, change the button to stop and,
+    record();
+   }
+
   $scope.record = function() {
      //Record the keyboard until the button is clicked again (seperate method?)
+     console.log('recording');
   }
 
   $scope.play = function() {
      //Play uncommitted track, if there is one. If no tracks have been recorded/all tracks have been committed, do nothing.
+     console.log('playing');
   }
 
   $scope.showConfirm = function() {
@@ -47,7 +58,7 @@ angular.module('starter.controllers', [])
 
         confirmPopup.then(function(res) {
            if(res) {
-              //record as normal
+              this.record();
               console.log('Overwritten');
            } else {
               //TODO: Stop button from changing! Stop it from calling the record function!!
@@ -57,6 +68,17 @@ angular.module('starter.controllers', [])
 
      };
 
+  //Adds a track to the compose page and takes the user to the compose page
+  $scope.addTrack = function() {
+    console.log('added the track');
+    //TODO: reroute to the compose page
+    //TODO: Clear track, change hasTrack to false.
+  }
+
+  //Plays the metronome noises, passing the BPM value to supercolider
+  $scope.playMetronome = function(BPM){
+    console.log(BPM);
+  }
 
   //These may not be used if the BPM values stay hard-coded
   this.numbers1 = new Array();
@@ -69,6 +91,7 @@ angular.module('starter.controllers', [])
       this.numbers1.push(i);
     }
 })
+
 
 .controller('ComposeCtrl', function($scope) {
   var s = Snap("#sequencer");

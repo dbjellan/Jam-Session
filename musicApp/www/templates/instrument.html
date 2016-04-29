@@ -12,7 +12,7 @@
           </div>
         </div>
         <div class="col">
-          <label class="item item-input item-select">
+          <label class="item item-input item-select" ng-model="BPM">
             <div class="input-label">
               BPM
             </div>
@@ -38,7 +38,7 @@
         </div>
 
         <div class="col">
-          <button class="button button-outline button-light">Add Track</button>
+          <button class="button button-outline button-light" ng-click="addTrack()">Add Track</button>
         </div>
       </div>
 
@@ -48,7 +48,7 @@
       <div class="col col-50 col-offset-25">
         <div class="item item-input item-light">
           <span class="input-label">Metronome</span>
-          <label class="toggle toggle-assertive">
+          <label class="toggle toggle-assertive" ng-change="startMetronome(BPM)">
             <input type="checkbox">
             <div class="track">
               <div class="handle"></div>
