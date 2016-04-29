@@ -6,24 +6,35 @@
 
 
 
+
 <ion-view title="Compose">
-
-
   <ion-content class="has-header" scroll="false">
-    <div class="row" style="color:white">
-      <div class="col">mute</div>
-      <div class="col">left</div>
-      <div class="col">right</div>
-      <div class="col">volume</div>
+    <section class="compose-container">
+      <div class="row" style="color:white">
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col">
+          <div class="button-bar">
+            <!-- Turn this to ion-stop when pressed?? -->
+            <button class="button icon ion-play button-balanced"></button>
+          </div>
+        </div>
+        <!--<div class="col">play/stop</div>-->
 
-    </div>
-    <div class="row" style="height:100%">
-      <div class="col" style="border:1px white">
-        <svg id="sequencer" style="width:100%; height:250px">
-        </svg>
       </div>
-    </div>
+      <div class="row" style="height:100%">
+        <div class="col-10" id="sequencer-left">
 
+        </div>
+        <div class="col-80" id="sequencer-center">
+          <svg id="sequencer"></svg>
+        </div>
+        <div class="col-10" id="sequencer-right">
+          <svg id="volKnobs"></svg>
+        </div>
+      </div>
+    </section>
   </ion-content>
-
 </ion-view>
+

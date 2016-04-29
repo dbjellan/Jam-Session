@@ -1,3 +1,4 @@
+var v = Snap("#volButtons");
 angular.module('starter.controllers', [])
 
 .controller('MainCtrl', function($scope) {
@@ -94,10 +95,25 @@ angular.module('starter.controllers', [])
 
 
 .controller('ComposeCtrl', function($scope) {
+  var sequencerCanvas = $('#sequencer');
+  var volKnobsCanvas = $('#volKnobs');
+
+  var height = sequencerCanvas.parent().height();
+  var volKnobsWidth = volKnobsCanvas.parent().width();
+  var sequencerWidth = sequencerCanvas.parent().width();
+
+  sequencerCanvas.attr('height', height);
+  sequencerCanvas.attr('width', sequencerWidth);
   var s = Snap("#sequencer");
-  var sequencer = new Sequencer.Sequencer();
-  sequencer.drawUI(s, 0, 0, 620, 250)
-})
+  var sequencer = new Compose.Sequencer();
+  sequencer.drawUI(s, 0, 0, sequencerWidth, height);
+
+  volKnobsCanvas.attr('height', height);
+  volKnobsCanvas.attr('width', volKnobsWidth);
+  var v = Snap("#volKnobs");
+  var volKnobs = new Compose.VolKnobs();
+  volKnobs.drawUI(v)
+});
 
 
-.controller()
+  //.controller()

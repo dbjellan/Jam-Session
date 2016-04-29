@@ -18,6 +18,12 @@
   <preference name="SplashScreenDelay" value="3000"/>
   <!--makes entire app run in landscape mode.-->
   <preference name="orientation" value="landscape" />
+
+  <!--hides status bar and runs app in fullscreen-->
+  <preference name="Fullscreen" value="true" />
+  <preference name="UIStatusBarHidden" value="true" />
+  <preference name="UIViewControllerBasedStatusBarAppearance" value="true" />
+
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>

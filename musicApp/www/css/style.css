@@ -12,6 +12,7 @@ As you can tell by my naming, these are great ideas.
     background-color: #171717;
 }
 
+
 .our-col {
   width:80%;
   margin-left:10%;
@@ -25,4 +26,23 @@ As you can tell by my naming, these are great ideas.
   margin-top:15px;
   margin-bottom:15px;
   border-radius:4px;
+}
+
+/*allows div rows to fill remaining vertical space using percentages, based on height of sibling
+rows rather than the container as a whole
+http://stackoverflow.com/questions/27685149/equal-height-flex-row-not-working
+ */
+.compose-container {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/*#sequencer-left {*/
+  /*float: left;*/
+/*}*/
+
+#sequencer-right {
+  float: right;
 }
