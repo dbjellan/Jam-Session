@@ -1,3 +1,4 @@
+var v = Snap("#volButtons");
 angular.module('starter.controllers', [])
 
 .controller('MainCtrl', function($scope) { //can add , $ionicSideMenuDelegate to revert
@@ -31,19 +32,25 @@ angular.module('starter.controllers', [])
   $scope.keyboard = keyboard
 })
 
-.controller('ComposeCtrl', function($scope, $ionicPosition) {
-  var seqAttr = angular.element(document.querySelector('#sequencer'));
-  //$('#sequencer').setAttribute('height', "500");
-  seqAttr.attr('height', "100%");
-  seqAttr.attr('width', "100px");
+.controller('ComposeCtrl', function($scope) {
+  var sequencerCanvas = $('#sequencer');
+  var volKnobsCanvas = $('#volKnobs');
+
+  var height = sequencerCanvas.parent().height();
+  var volKnobsWidth = volKnobsCanvas.parent().width();
+  var sequencerWidth = sequencerCanvas.parent().width();
+
+  sequencerCanvas.attr('height', height);
+  sequencerCanvas.attr('width', sequencerWidth);
   var s = Snap("#sequencer");
-  var sequencer = new Sequencer.Sequencer();
-  //var viewBox = s.attr("viewBox");
-  //alert($ionicPosition.position(seqAttr));
-  console.log($ionicPosition.position(seqAttr).top)
-  sequencer.drawUI(s, 0, 0, 300, 20);
-  //console.log(window.innerHeight)
-  //$('#sequencer').setAttribute('height', 500);
+  var sequencer = new Compose.Sequencer();
+  sequencer.drawUI(s, 0, 0, sequencerWidth, height);
+
+  volKnobsCanvas.attr('height', height);
+  volKnobsCanvas.attr('width', volKnobsWidth);
+  var v = Snap("#volKnobs");
+  var volKnobs = new Compose.VolKnobs();
+  volKnobs.drawUI(v)
 });
 
 

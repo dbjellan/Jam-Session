@@ -14,13 +14,24 @@
         <div class="col"></div>
         <div class="col"></div>
         <div class="col"></div>
-        <div class="col">play/stop</div>
+        <div class="col">
+          <div class="button-bar">
+            <!-- Turn this to ion-stop when pressed?? -->
+            <button class="button icon ion-play button-balanced"></button>
+          </div>
+        </div>
+        <!--<div class="col">play/stop</div>-->
 
       </div>
       <div class="row" style="height:100%">
-        <div class="col">
-          <svg id="sequencer">
-          </svg>
+        <div class="col-10" id="sequencer-left">
+
+        </div>
+        <div class="col-80" id="sequencer-center">
+          <svg id="sequencer"></svg>
+        </div>
+        <div class="col-10" id="sequencer-right">
+          <svg id="volKnobs"></svg>
         </div>
       </div>
     </section>

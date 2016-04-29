@@ -18,6 +18,7 @@ rows rather than the container as a whole
 http://stackoverflow.com/questions/27685149/equal-height-flex-row-not-working
  */
 .compose-container {
+  margin: auto;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -34,3 +35,10 @@ http://stackoverflow.com/questions/27685149/equal-height-flex-row-not-working
   border-radius:4px;
 }
 
+/*#sequencer-left {*/
+  /*float: left;*/
+/*}*/
+
+#sequencer-right {
+  float: right;
+}
