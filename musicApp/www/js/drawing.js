@@ -218,21 +218,27 @@ TODO: deal with multitouch??
     arc.attr({
       fill: "none",
       stroke: "white",
-      strokeWidth: 2
+      strokeWidth: 2,
+      strokeLinecap:"round"
     });
 
 
 
 
 
-    var rotAmt = 0;
-    var newRotAmt = 0;
+    //var rotAmt = 0;
+    //var newRotAmt = 0;
     var volButton = svg.group(circle, dash);
     var startVol = volume;
+
     var moveFunc = function (dx, dy) {
       volume = startVol -dy;
-      console.log(startVol);
-      console.log(dy);
+      if(volume > 100) {
+        volume = 100;
+      } else if (volume < 0) {
+        volume = 0;
+      }
+
       var matrix = new Snap.Matrix();
       matrix.rotate(volume, centerX, centerY);
       this.attr({
@@ -244,9 +250,7 @@ TODO: deal with multitouch??
       function(){
       },
       function(){
-        rotAmt = newRotAmt;
         startVol = volume;
-        //volPercent
       }
     );
   };

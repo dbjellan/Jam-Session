@@ -85,21 +85,28 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ComposeCtrl', function($scope) {
-  var sequencerCanvas = $('#sequencer');
+  var timelineCanvas = $('#timeline');
   var volKnobsCanvas = $('#volKnobs');
 
-  var height = sequencerCanvas.parent().height();
-  var volKnobsWidth = volKnobsCanvas.parent().width();
-  var sequencerWidth = sequencerCanvas.parent().width();
+  var timelineCanvWidth = 1000;
+  var timelineCanvHeight = 1000;
+  var timelineVPWidth = timelineCanvas.parent().width();
+  var timelineVPHeight = $('#compose-scrollbox-y').height();
+  //var canvasHeight = 1000;
+  //var tracksCanvasWidth =
+  //var height = $('#tracks-container').height();
+  //var height = sequencerCanvas.parent().height();
+  var volKnobsCanvWidth = volKnobsCanvas.parent().width();
+  var volKnobsCanvHeight = 1000;
 
-  sequencerCanvas.attr('height', height);
-  sequencerCanvas.attr('width', sequencerWidth);
-  var s = Snap("#sequencer");
+  timelineCanvas.attr('width', timelineCanvWidth);
+  timelineCanvas.attr('height', timelineCanvHeight);
+  var s = Snap("#timeline");
   var sequencer = new Compose.Sequencer();
-  sequencer.drawUI(s, 0, 0, sequencerWidth, height);
+  sequencer.drawUI(s, 0, 0, timelineVPWidth, timelineVPHeight);
 
-  volKnobsCanvas.attr('height', height);
-  volKnobsCanvas.attr('width', volKnobsWidth);
+  volKnobsCanvas.attr('height', volKnobsCanvHeight);
+  volKnobsCanvas.attr('width', volKnobsCanvWidth);
   var v = Snap("#volKnobs");
   var volKnobs = new Compose.VolKnobs();
   volKnobs.drawUI(v)
