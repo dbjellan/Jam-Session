@@ -68,7 +68,7 @@ public class SuperCollider extends CordovaPlugin {
                 }
             }
         } catch (IOException e) {
-            Log.i(TAG, "error copying synth def: " + e.toString());
+            Log.w(TAG, "error copying synth def: " + e.toString());
         }
     }
 
@@ -78,10 +78,10 @@ public class SuperCollider extends CordovaPlugin {
             File dir = new File(dataDir);
             if (!dir.exists()) {
                 dir.mkdirs();
-                copySynthDefs();
             }
+            copySynthDefs();
         } catch(Exception e) {
-            Log.w("creating file error", e.toString());
+            Log.w(TAG, "error copying synth defs:" + e.toString());
         }
         superCollider = new SCAudio(dllDirStr);
         superCollider.start();
