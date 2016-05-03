@@ -25,9 +25,9 @@ angular.module('starter.controllers', [])
   keyboard.drawUI(s, 0, 0, width, 150)
   $('#keyboard').css({'width': width})
 
-  $scope.instrumentRecorder = instrumentRecorder
-  $scope.keyboard = keyboard
-
+  $scope.instrumentRecorder = instrumentRecorder;
+  $scope.keyboard = keyboard;
+  $scope.BPM= 120;
 
   $scope.recordLogic = function() {
     //??? If recording, then stop recording, turn button to record
@@ -42,7 +42,9 @@ angular.module('starter.controllers', [])
     $scope.instrumentRecorder.startRecording()
   }
 
-  $scope.done = function() {}
+  $scope.done = function() {
+    //TODO: Update hasTrack, which should change the color of the addTrack button
+  }
 
   $scope.play = function() {
      //Play uncommitted track, if there is one. If no tracks have been recorded/all tracks have been committed, do nothing.
@@ -75,9 +77,14 @@ angular.module('starter.controllers', [])
     //TODO: Clear track, change hasTrack to false.
   }
 
+
   //Plays the metronome noises, passing the BPM value to supercolider
   $scope.playMetronome = function(BPM){
-    console.log(BPM);
+    //TODO: stuff to play the metronome
+
+    //var speed = document.getElementById($scope.BPM);
+    //var num = speed.options[speed.selectedIndex].value;
+    console.log(BPM); //test to see if we can get the BPM from the select
   }
 
   //These may not be used if the BPM values stay hard-coded
