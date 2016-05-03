@@ -27,32 +27,41 @@ angular.module('starter.controllers', [])
 
   $scope.instrumentRecorder = instrumentRecorder;
   $scope.keyboard = keyboard;
-  $scope.BPM= 120;
+  $scope.BPM = 0;
+  $scope.isRecording = false;
+  $scope.hasTrack = false;
 
   $scope.recordLogic = function() {
-    //??? If recording, then stop recording, turn button to record
-    //If hasTrack,
-    showConfirm();
-    //If !hasTrack, change the button to stop and,
-    record();
-   }
+    if(this.isRecording){this.done();} //why is this not getting called anymore??
+    else{
+      if(this.hasTrack){this.showConfirm();}
+      else{this.record();}
+    }
+  }
 
+ /*Record the keyboard until the button is clicked again (seperate method?)*/
   $scope.record = function() {
-    //Record the keyboard until the button is clicked again (seperate method?)
-    $scope.instrumentRecorder.startRecording()
+    console.log("recording");
+    this.isRecording = true;
+    //$scope.instrumentRecorder.startRecording()
+    console.log("isRecording = "+ this.isRecording + " , hasTrack = " + this.hasTrack);
   }
 
   $scope.done = function() {
-    //TODO: Update hasTrack, which should change the color of the addTrack button
+    console.log("done");
+    this.isRecording = false;
+    this.hasTrack = true;
+    console.log("isRecording = "+ this.isRecording + " , hasTrack = " + this.hasTrack);
   }
 
+  /*Play uncommitted track, if there is one. If no tracks have been recorded/all tracks have been committed, do nothing.*/
   $scope.play = function() {
-     //Play uncommitted track, if there is one. If no tracks have been recorded/all tracks have been committed, do nothing.
-     var recording = $scope.instrumentRecorder.getRecording()
+    console.log("playing");
+    //var recording = $scope.instrumentRecorder.getRecording()
+    console.log("isRecording = "+ this.isRecording + " , hasTrack = " + this.hasTrack);
   }
 
   $scope.showConfirm = function() {
-    //TODO: If the Add Track button is active (there is an uncommitted track)
         var confirmPopup = $ionicPopup.confirm({
            title: 'Are you sure?',
            template: 'If you record without adding your previous recorded track, it will be overwritten. Is that okay?'
@@ -60,11 +69,11 @@ angular.module('starter.controllers', [])
 
         confirmPopup.then(function(res) {
            if(res) {
-              this.record();
-              console.log('Overwritten');
+            console.log('Overwritten');
+            $scope.record();
+
            } else {
-              //TODO: Stop button from changing! Stop it from calling the record function!!
-              console.log('Not recording');
+            console.log('Not recording');
            }
         });
 
@@ -72,19 +81,23 @@ angular.module('starter.controllers', [])
 
   //Adds a track to the compose page and takes the user to the compose page
   $scope.addTrack = function() {
-    console.log('added the track');
     //TODO: reroute to the compose page
-    //TODO: Clear track, change hasTrack to false.
+    //TODO: Clear track
+    this.hasTrack = false;
+    console.log('added the track, hasTrack = ' + this.hasTrack);
   }
 
 
   //Plays the metronome noises, passing the BPM value to supercolider
   $scope.playMetronome = function(BPM){
-    //TODO: stuff to play the metronome
+    if (this.metronome.value == 'ON') {
+        //TODO: stuff to play the metronome
 
-    //var speed = document.getElementById($scope.BPM);
-    //var num = speed.options[speed.selectedIndex].value;
-    console.log(BPM); //test to see if we can get the BPM from the select
+        //var speed = document.getElementById($scope.BPM);
+        //var num = speed.options[speed.selectedIndex].value;
+
+        console.log(BPM); //test to see if we can get the BPM from the select
+    }
   }
 
   //These may not be used if the BPM values stay hard-coded
