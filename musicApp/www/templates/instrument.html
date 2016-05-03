@@ -4,7 +4,7 @@
     <div class="row">
       <div class="row controller-container our-col">
 
-        <div class="col">
+        <div class="col col-center">
           <div class="button-bar">
             <button on-touch = "recordLogic()" class="button icon ion-record button-assertive" ng-model="button" ng-class="{'button icon ion-record button-assertive': isRecording == false, 'button icon ion-stop button-energized': isRecording == true}"></button>
             <button on-touch = "play()" class="button icon ion-play button-balanced"></button>
@@ -25,35 +25,30 @@
               <option value="200">200</option>
               <option value="220">220</option>
               <option value="240">240</option>
-              <!-- On more efficent method: This doesn't work, why?
-              <ion-option collection-repeat="number in ctrl.numbers2">
-                  {{number}}
-              </ion-option>
-              -->
             </select>
           </label>
-        </div>
-
-        <div class="col">
-          <button class="button button-outline button-light" ng-class="{'button-light': hasTrack == false, 'button-royal': hasTrack == true}" ng-click="addTrack()">Add Track</button>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="row">
-      <div class="col col-50 col-offset-25">
-        <div class="item item-input item-light">
-          <span class="input-label">Metronome</span>
-          <label class="toggle toggle-royal">
-            <input type="checkbox" ng-model="metronome.value" ng-true-value="'ON'" ng-false-value="'OFF'" ng-change="playMetronome(BPM)">
-            <div class="track">
-              <div class="handle"></div>
+          <div class="row">
+            <div class="col">
+              <div class="item item-input item-light">
+                <span class="input-label">Metronome</span>
+                <label class="toggle toggle-royal">
+                  <input type="checkbox" ng-model="metronome.value" ng-true-value="'ON'" ng-false-value="'OFF'" ng-change="playMetronome(BPM)">
+                  <div class="track">
+                    <div class="handle"></div>
+                  </div>
+                </label>
+              </div>
             </div>
-          </label>
+          </div>
+        </div>
+
+        <div class="col col-center">
+          <button class="button button-light" ng-class="{'button-outline button-light': hasTrack == false, 'button-royal': hasTrack == true}" ng-click="addTrack()">Add Track</button>
         </div>
       </div>
+
     </div>
+
 
     <div class="row">
       <div id="keyboard-container" class="col col-center our-col">

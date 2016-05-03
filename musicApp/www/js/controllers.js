@@ -32,33 +32,33 @@ angular.module('starter.controllers', [])
   $scope.hasTrack = false;
 
   $scope.recordLogic = function() {
-    if(this.isRecording){this.done();} //why is this not getting called anymore??
+    if(this.isRecording){this.done();}
     else{
       if(this.hasTrack){this.showConfirm();}
       else{this.record();}
     }
   }
 
- /*Record the keyboard until the button is clicked again (seperate method?)*/
+ /*Record the keyboard*/
   $scope.record = function() {
     console.log("recording");
     this.isRecording = true;
     //$scope.instrumentRecorder.startRecording()
-    console.log("isRecording = "+ this.isRecording + " , hasTrack = " + this.hasTrack);
+    //console.log("isRecording = "+ this.isRecording + " , hasTrack = " + this.hasTrack);
   }
 
   $scope.done = function() {
     console.log("done");
     this.isRecording = false;
     this.hasTrack = true;
-    console.log("isRecording = "+ this.isRecording + " , hasTrack = " + this.hasTrack);
+    //console.log("isRecording = "+ this.isRecording + " , hasTrack = " + this.hasTrack);
   }
 
   /*Play uncommitted track, if there is one. If no tracks have been recorded/all tracks have been committed, do nothing.*/
   $scope.play = function() {
     console.log("playing");
     //var recording = $scope.instrumentRecorder.getRecording()
-    console.log("isRecording = "+ this.isRecording + " , hasTrack = " + this.hasTrack);
+    //console.log("isRecording = "+ this.isRecording + " , hasTrack = " + this.hasTrack);
   }
 
   $scope.showConfirm = function() {
@@ -84,7 +84,7 @@ angular.module('starter.controllers', [])
     //TODO: reroute to the compose page
     //TODO: Clear track
     this.hasTrack = false;
-    console.log('added the track, hasTrack = ' + this.hasTrack);
+    //console.log('added the track, hasTrack = ' + this.hasTrack);
   }
 
 
