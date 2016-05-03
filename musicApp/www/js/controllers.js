@@ -1,15 +1,7 @@
 var v = Snap("#volButtons");
 angular.module('starter.controllers', [])
 
-.controller('MainCtrl', function($scope) { //can add , $ionicSideMenuDelegate to revert
-  //consider using ionicModal for the confirm for recording a song +
-  //in which case, edit according to the slidemenu template app
-
-/*  //I don't know that this is neccessary anymore
-  $scope.toggleLeft = function(){
-    $ionicSideMenuDelegate.toggleLeft();
-  }*/
-
+.controller('MainCtrl', function($scope) {
   //For the sidemenu. I believe this is the right place to put it?
   $scope.save = function(){
     //this will be able to save a song
@@ -33,26 +25,43 @@ angular.module('starter.controllers', [])
   keyboard.drawUI(s, 0, 0, width, 150)
   $('#keyboard').css({'width': width})
 
-  $scope.instrumentRecorder = instrumentRecorder
-  $scope.keyboard = keyboard
+  $scope.instrumentRecorder = instrumentRecorder;
+  $scope.keyboard = keyboard;
+  $scope.BPM = 0;
+  $scope.isRecording = false;
+  $scope.hasTrack = false;
 
+  $scope.recordLogic = function() {
+    if(this.isRecording){this.done();}
+    else{
+      if(this.hasTrack){this.showConfirm();}
+      else{this.record();}
+    }
+  }
+
+ /*Record the keyboard*/
   $scope.record = function() {
-    //Record the keyboard until the button is clicked again (seperate method?)
-    $scope.instrumentRecorder.startRecording()
+    console.log("recording");
+    this.isRecording = true;
+    //$scope.instrumentRecorder.startRecording()
+    //console.log("isRecording = "+ this.isRecording + " , hasTrack = " + this.hasTrack);
   }
 
   $scope.done = function() {
-
+    console.log("done");
+    this.isRecording = false;
+    this.hasTrack = true;
+    //console.log("isRecording = "+ this.isRecording + " , hasTrack = " + this.hasTrack);
   }
 
+  /*Play uncommitted track, if there is one. If no tracks have been recorded/all tracks have been committed, do nothing.*/
   $scope.play = function() {
-     //Play uncommitted track, if there is one. If no tracks have been recorded/all tracks have been committed, do nothing.
-     var recording = $scope.instrumentRecorder.getRecording()
-
+    console.log("playing");
+    //var recording = $scope.instrumentRecorder.getRecording()
+    //console.log("isRecording = "+ this.isRecording + " , hasTrack = " + this.hasTrack);
   }
 
   $scope.showConfirm = function() {
-    //TODO: If the Add Track button is active (there is an uncommitted track)
         var confirmPopup = $ionicPopup.confirm({
            title: 'Are you sure?',
            template: 'If you record without adding your previous recorded track, it will be overwritten. Is that okay?'
@@ -60,16 +69,36 @@ angular.module('starter.controllers', [])
 
         confirmPopup.then(function(res) {
            if(res) {
-              //record as normal
-              console.log('Overwritten');
+            console.log('Overwritten');
+            $scope.record();
+
            } else {
-              //TODO: Stop button from changing! Stop it from calling the record function!!
-              console.log('Not recording');
+            console.log('Not recording');
            }
         });
 
      };
 
+  //Adds a track to the compose page and takes the user to the compose page
+  $scope.addTrack = function() {
+    //TODO: reroute to the compose page
+    //TODO: Clear track
+    this.hasTrack = false;
+    //console.log('added the track, hasTrack = ' + this.hasTrack);
+  }
+
+
+  //Plays the metronome noises, passing the BPM value to supercolider
+  $scope.playMetronome = function(BPM){
+    if (this.metronome.value == 'ON') {
+        //TODO: stuff to play the metronome
+
+        //var speed = document.getElementById($scope.BPM);
+        //var num = speed.options[speed.selectedIndex].value;
+
+        console.log(BPM); //test to see if we can get the BPM from the select
+    }
+  }
 
   //These may not be used if the BPM values stay hard-coded
   this.numbers1 = new Array();
@@ -83,6 +112,7 @@ angular.module('starter.controllers', [])
     }
 
 })
+
 
 .controller('ComposeCtrl', function($scope) {
   var timelineCanvas = $('#timeline');

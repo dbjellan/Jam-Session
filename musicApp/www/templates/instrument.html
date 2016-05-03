@@ -4,59 +4,51 @@
     <div class="row">
       <div class="row controller-container our-col">
 
-        <div class="col">
+        <div class="col col-center">
           <div class="button-bar">
-            <button on-touch = "record()" class="button icon ion-record button-assertive" ng-model="button" ng-click="showConfirm();button.clicked=!button.clicked" ng-class="button.clicked? 'button icon ion-stop button-energized':'button icon ion-record button-assertive'"></button>
-            <!-- TODO: Make it so that showConfirm() only happens when Add Track is active, and button doesn't change to Stop before you hit okay on the popup -->
+            <button on-touch = "recordLogic()" class="button icon ion-record button-assertive" ng-model="button" ng-class="{'button icon ion-record button-assertive': isRecording == false, 'button icon ion-stop button-energized': isRecording == true}"></button>
             <button on-touch = "play()" class="button icon ion-play button-balanced"></button>
           </div>
         </div>
         <div class="col">
           <label class="item item-input item-select">
-            <div class="input-label">
-              BPM
-            </div>
-            <select>
-              <option>40</option>
-              <option>60</option>
-              <option>80</option>
-              <option>100</option>
-              <option selected>120</option>
-              <option>140</option>
-              <option>160</option>
-              <option>180</option>
-              <option>200</option>
-              <option>220</option>
-              <option>240</option>
-              <!-- On more efficent method: This doesn't work, why?
-              <ion-option collection-repeat="number in ctrl.numbers2">
-                  {{number}}
-              </ion-option>
-              -->
+            <div class="input-label">BPM</div>
+            <select ng-model="BPM">
+              <option value="40">40</option>
+              <option value="60">60</option>
+              <option value="80">80</option>
+              <option value="100">100</option>
+              <option value="120">120</option> <!--Why does this not work anymore??-->
+              <option value="140">140</option>
+              <option value="160">160</option>
+              <option value="180">180</option>
+              <option value="200">200</option>
+              <option value="220">220</option>
+              <option value="240">240</option>
             </select>
           </label>
-        </div>
-
-        <div class="col">
-          <button class="button button-outline button-light">Add Track</button>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="row">
-      <div class="col col-50 col-offset-25">
-        <div class="item item-input item-light">
-          <span class="input-label">Metronome</span>
-          <label class="toggle toggle-assertive">
-            <input type="checkbox">
-            <div class="track">
-              <div class="handle"></div>
+          <div class="row">
+            <div class="col">
+              <div class="item item-input item-light">
+                <span class="input-label">Metronome</span>
+                <label class="toggle toggle-royal">
+                  <input type="checkbox" ng-model="metronome.value" ng-true-value="'ON'" ng-false-value="'OFF'" ng-change="playMetronome(BPM)">
+                  <div class="track">
+                    <div class="handle"></div>
+                  </div>
+                </label>
+              </div>
             </div>
-          </label>
+          </div>
+        </div>
+
+        <div class="col col-center">
+          <button class="button button-light" ng-class="{'button-outline button-light': hasTrack == false, 'button-royal': hasTrack == true}" ng-click="addTrack()">Add Track</button>
         </div>
       </div>
+
     </div>
+
 
     <div class="row">
       <div id="keyboard-container" class="col col-center our-col">
