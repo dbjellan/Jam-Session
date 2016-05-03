@@ -40,8 +40,8 @@ var Compose = (function() {
   //
   //}
 
-  Tracks.prototype.drawUI = function(svg, x, y, width, height) {
-    this.ui = new Drawing.SequencerUI(svg, x, y, width, height, this.tracks)
+  Tracks.prototype.drawUI = function(svg, width, height) {
+    this.ui = new Drawing.TracksUI(svg, width, height, this.tracks)
   };
 
 
@@ -60,7 +60,7 @@ var Compose = (function() {
   };
 
   var exports = {
-    Sequencer: Tracks,
+    Tracks: Tracks,
     VolKnobs: VolKnobs
   };
 

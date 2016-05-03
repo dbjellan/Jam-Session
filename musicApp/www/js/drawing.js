@@ -91,18 +91,18 @@ TODO: deal with multitouch??
 
   //--------- Compose UI -----------------
 
-  var SequencerUI = function(svg, x, y, width, height, tracks) {
+  var TracksUI = function(svg, viewportWidth, viewportHeight, tracks) {
     var numVisibleTracks = 4;
     var startingTrack = 0;
-    var canvasWidth = width;
-    var canvasHeight = height;
-    var trackHeight = canvasHeight/numVisibleTracks;
+    //var canvasWidth = width;
+    //var canvasHeight = height;
+    var trackHeight = viewportHeight/numVisibleTracks;
     this.clipColor = 'white';
     this.trackColor = 'gray';
-    this.drawTracks(svg, tracks, numVisibleTracks, startingTrack, canvasWidth, trackHeight)
+    this.drawTracks(svg, tracks, numVisibleTracks, startingTrack, viewportWidth, trackHeight)
   };
 
-  SequencerUI.prototype.drawTracks = function(svg, tracks, numVisibleTracks, startingTrack, trackWidth, trackHeight) {
+  TracksUI.prototype.drawTracks = function(svg, tracks, numVisibleTracks, startingTrack, trackWidth, trackHeight) {
     var color = this.trackColor;
     for(var i = 0; i<numVisibleTracks; i++) {
       var offsetY = trackHeight * i;
@@ -118,7 +118,7 @@ TODO: deal with multitouch??
   };
 
 
-  SequencerUI.prototype.drawClips = function(svg, track, trackHeight, offsetY) {
+  TracksUI.prototype.drawClips = function(svg, track, trackHeight, offsetY) {
     var color = this.clipColor;
     //console.log(track);
     for(var i = 0; i < track.clips.length; i++) {
@@ -132,7 +132,7 @@ TODO: deal with multitouch??
     svg.dblclick(this.addNewClip)
   };
 
-  SequencerUI.prototype.addNewClip = function(event) {
+  TracksUI.prototype.addNewClip = function(event) {
     var svgElement = event.target;
     var clipColor = this.clipColor;
     var selectedClipColor = "purple";
@@ -146,7 +146,7 @@ TODO: deal with multitouch??
   };
 
 
-  SequencerUI.prototype.newClipSelected = function(event) {
+  TracksUI.prototype.newClipSelected = function(event) {
     var svgElement = event.target;
     var clipColor = this.clipColor;
     var selectedClipColor = "purple";
@@ -259,7 +259,7 @@ TODO: deal with multitouch??
 
   var exports = {
     KeyboardUI: KeyboardUI,
-    SequencerUI: SequencerUI,
+    TracksUI: TracksUI,
     VolKnobsUI: VolKnobsUI
   };
 

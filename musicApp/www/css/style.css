@@ -71,10 +71,13 @@ http://stackoverflow.com/questions/27685149/equal-height-flex-row-not-working
   /*height: 100%;*/
 /*}*/
 
-/*#compose-muteButtons {*/
-  /*float: left;*/
-/*}*/
+#compose-muteButtons {
+  float: left;
+  padding-right: 0;
+}
 
 #compose-volKnobs {
   float: right;
+  padding-left: 0;
+  /*padding-right: 0;*/
 }
