@@ -68,6 +68,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 })
 
 .factory("ClipProvider", function() {
-  var instance = {}
+  var instance = {
+    clips: [],
+    addClip: function(clip) {
+      clips.push(clip)
+    },
+    getClips: function() {
+      return clips
+    }
+  }
   return instance
 });

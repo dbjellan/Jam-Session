@@ -17,3 +17,4 @@ In progress:
 Less Important:
 - see if we can eliminate plugin just containing supercollider.jar
 - separate plugin into other git repo
+- save/load clips
