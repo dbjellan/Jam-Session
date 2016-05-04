@@ -38,6 +38,7 @@ var Playback = (function() {
     if (this.startTime) {
       var time = new Date() - this.startTime
       this.clip.push([time, actionCB])
+      console.log('recording action')
     }
   }
 
