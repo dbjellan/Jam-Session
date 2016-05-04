@@ -41,7 +41,7 @@ var Compose = (function() {
   //}
 
   Tracks.prototype.drawUI = function(svg, width, height) {
-    this.ui = new Drawing.TracksUI(svg, width, height, this.tracks)
+    this.ui = new ComposeUI.TracksUI(svg, width, height, this.tracks)
   };
 
 
@@ -56,7 +56,7 @@ var Compose = (function() {
   };
 
   VolKnobs.prototype.drawUI = function(svg) {
-    this.ui = new Drawing.VolKnobsUI(svg);
+    this.ui = new ComposeUI.VolKnobsUI(svg);
   };
 
   var exports = {
