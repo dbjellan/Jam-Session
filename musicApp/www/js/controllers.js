@@ -16,7 +16,7 @@ angular.module('starter.controllers', [])
 
 .controller('InstrumentCtrl', function($scope, $ionicPopup) {
   var s = Snap("#keyboard")
-  var instrumentRecorder = new Instruments.InstrumentRecorder(Instruments.Keyboard.bind(null, 36))
+  var instrumentRecorder = new Playback.InstrumentRecorder(Instruments.Keyboard.bind(null, 36))
   var keyboard = new Instruments.Keyboard(36, instrumentRecorder)
 
   //width = Math.min(window.innerWidth *.8);
@@ -27,7 +27,7 @@ angular.module('starter.controllers', [])
 
   $scope.instrumentRecorder = instrumentRecorder;
   $scope.keyboard = keyboard;
-  $scope.BPM = 0;
+  $scope.BPM = 120;
   $scope.isRecording = false;
   $scope.hasTrack = false;
 
@@ -43,7 +43,7 @@ angular.module('starter.controllers', [])
   $scope.record = function() {
     console.log("recording");
     this.isRecording = true;
-    //$scope.instrumentRecorder.startRecording()
+    $scope.instrumentRecorder.startRecording()
     //console.log("isRecording = "+ this.isRecording + " , hasTrack = " + this.hasTrack);
   }
 
@@ -57,7 +57,9 @@ angular.module('starter.controllers', [])
   /*Play uncommitted track, if there is one. If no tracks have been recorded/all tracks have been committed, do nothing.*/
   $scope.play = function() {
     console.log("playing");
-    //var recording = $scope.instrumentRecorder.getRecording()
+    var recording = $scope.instrumentRecorder.getRecording()
+    $scope.currentLoop = new Playback.Loop(recording)
+    $scope.currentLoop.play()
     //console.log("isRecording = "+ this.isRecording + " , hasTrack = " + this.hasTrack);
   }
 
@@ -81,10 +83,7 @@ angular.module('starter.controllers', [])
 
   //Adds a track to the compose page and takes the user to the compose page
   $scope.addTrack = function() {
-    //TODO: reroute to the compose page
-    //TODO: Clear track
-    this.hasTrack = false;
-    //console.log('added the track, hasTrack = ' + this.hasTrack);
+    
   }
 
 
