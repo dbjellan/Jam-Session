@@ -114,25 +114,30 @@ angular.module('starter.controllers', [])
 
 
 .controller('ComposeCtrl', function($scope) {
-  var sequencerCanvas = $('#sequencer');
+  var timelineCanvas = $('#timeline');
   var volKnobsCanvas = $('#volKnobs');
 
-  var height = sequencerCanvas.parent().height();
-  var volKnobsWidth = volKnobsCanvas.parent().width();
-  var sequencerWidth = sequencerCanvas.parent().width();
 
-  sequencerCanvas.attr('height', height);
-  sequencerCanvas.attr('width', sequencerWidth);
-  var s = Snap("#sequencer");
-  var sequencer = new Compose.Sequencer();
-  sequencer.drawUI(s, 0, 0, sequencerWidth, height);
+  //TODO: eventually make canvas dimensions dependent on number of tracks (h) and song length (w)
+  // dimensions of svg canvas containing tracks
+  var timelineCanvWidth = 1000;
+  var timelineCanvHeight = 1000;
 
-  volKnobsCanvas.attr('height', height);
-  volKnobsCanvas.attr('width', volKnobsWidth);
+  // dimensions of viewport containing the tracks. Will scroll if smaller than canvas dimensions
+  var timelineVPWidth = timelineCanvas.parent().width();
+  var timelineVPHeight = $('#compose-scrollbox-y').height();
+  var volKnobsCanvWidth = volKnobsCanvas.parent().width();
+  var volKnobsCanvHeight = 1000;
+
+  timelineCanvas.attr('width', timelineCanvWidth);
+  timelineCanvas.attr('height', timelineCanvHeight);
+  var t = Snap("#timeline");
+  var sequencer = new Compose.Tracks();
+  sequencer.drawUI(t, timelineVPWidth, timelineVPHeight);
+
+  volKnobsCanvas.attr('width', volKnobsCanvWidth);
+  volKnobsCanvas.attr('height', volKnobsCanvHeight);
   var v = Snap("#volKnobs");
   var volKnobs = new Compose.VolKnobs();
   volKnobs.drawUI(v)
 });
-
-
-  //.controller()

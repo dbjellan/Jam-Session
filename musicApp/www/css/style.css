@@ -9,7 +9,7 @@ As you can tell by my naming, these are great ideas.
  */
 
  .background, .background .pane/*, .background .item, .background .item-complex .item-content*/ {
-    background-color: #171717;
+    background-color: #414141;
 }
 
 
@@ -33,16 +33,51 @@ rows rather than the container as a whole
 http://stackoverflow.com/questions/27685149/equal-height-flex-row-not-working
  */
 .compose-container {
-  margin: auto;
-  display: flex;
-  flex-direction: column;
+  /*margin: auto;*/
+  /*display: flex;*/
+  /*flex-direction: column;*/
   height: 100%;
 }
 
-/*#sequencer-left {*/
-  /*float: left;*/
+#compose-toolbar {
+  height: 20%;
+}
+
+#compose-scrollbox-y {
+  height: 80%;
+  width: 100%;
+  padding: 5px;
+
+  /*position: relative;*/
+}
+
+#arrangement {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+
+#timeline-container {
+  height: 100%;
+  padding-top: 0;
+  padding-bottom: 0;
+  /*display: flex;*/
+}
+
+/*#track-scrollBox {*/
+  /*position: relative;*/
+  /*height: 100%;*/
 /*}*/
 
-#sequencer-right {
+#compose-muteButtons {
+  float: left;
+  padding-right: 0;
+}
+
+#compose-volKnobs {
   float: right;
+  padding-left: 0;
+  /*padding-right: 0;*/
 }
