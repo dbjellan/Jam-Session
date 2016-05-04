@@ -1,15 +1,16 @@
-XAdd test for calling supercollider in browser
-XSize+place keyboard reasonably
+X Add test for calling supercollider in browser
+X Size+place keyboard reasonably
+X Supercollider file copy bug
+X add placeholder text in music controller -> assigned to Amber
 
 In progress:
-- add placeholder text in music controller -> assigned to Amber
 - sequencer ui -> assigned to Micah
-
-- Supercollider file copy bug
 - get playback/record functionality working
 - Write Angular serivce to share clips between views
 - Write sequencer logic
 - make metronome/beats per minute work
+
+
 - Look at sizing on physical phone
 
 - Unknown: Do we need to change synthdefs to Mix output

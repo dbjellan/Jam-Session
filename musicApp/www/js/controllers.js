@@ -14,9 +14,9 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('InstrumentCtrl', function($scope, $ionicPopup) {
+.controller('InstrumentCtrl', ['$scope', 'ClipProvider', '$ionicPopup', function($scope, ClipProvider, $ionicPopup) {
   var s = Snap("#keyboard")
-  var instrumentRecorder = new Instruments.InstrumentRecorder(Instruments.Keyboard.bind(null, 36))
+  var instrumentRecorder = new Playback.InstrumentRecorder(Instruments.Keyboard.bind(null, 36))
   var keyboard = new Instruments.Keyboard(36, instrumentRecorder)
 
   //width = Math.min(window.innerWidth *.8);
@@ -27,7 +27,7 @@ angular.module('starter.controllers', [])
 
   $scope.instrumentRecorder = instrumentRecorder;
   $scope.keyboard = keyboard;
-  $scope.BPM = 0;
+  $scope.BPM = 120;
   $scope.isRecording = false;
   $scope.hasTrack = false;
 
@@ -43,21 +43,25 @@ angular.module('starter.controllers', [])
   $scope.record = function() {
     console.log("recording");
     this.isRecording = true;
-    //$scope.instrumentRecorder.startRecording()
+    $scope.instrumentRecorder.startRecording()
     //console.log("isRecording = "+ this.isRecording + " , hasTrack = " + this.hasTrack);
   }
 
   $scope.done = function() {
     console.log("done");
-    this.isRecording = false;
+    this.isRecording = false
     this.hasTrack = true;
+    $scope.recording = $scope.instrumentRecorder.startRecording()
     //console.log("isRecording = "+ this.isRecording + " , hasTrack = " + this.hasTrack);
   }
 
   /*Play uncommitted track, if there is one. If no tracks have been recorded/all tracks have been committed, do nothing.*/
   $scope.play = function() {
     console.log("playing");
-    //var recording = $scope.instrumentRecorder.getRecording()
+    var recording = $scope.instrumentRecorder.getRecording()
+    console.log(recording)
+    $scope.currentLoop = new Playback.Loop(recording)
+    $scope.currentLoop.play()
     //console.log("isRecording = "+ this.isRecording + " , hasTrack = " + this.hasTrack);
   }
 
@@ -81,10 +85,7 @@ angular.module('starter.controllers', [])
 
   //Adds a track to the compose page and takes the user to the compose page
   $scope.addTrack = function() {
-    //TODO: reroute to the compose page
-    //TODO: Clear track
-    this.hasTrack = false;
-    //console.log('added the track, hasTrack = ' + this.hasTrack);
+
   }
 
 
@@ -111,29 +112,34 @@ angular.module('starter.controllers', [])
       this.numbers1.push(i);
     }
 
-})
+}])
 
 
-.controller('ComposeCtrl', function($scope) {
-  var sequencerCanvas = $('#sequencer');
+.controller('ComposeCtrl', ['$scope', 'ClipProvider', function($scope, ClipProvider) {
+  var timelineCanvas = $('#timeline');
   var volKnobsCanvas = $('#volKnobs');
 
-  var height = sequencerCanvas.parent().height();
-  var volKnobsWidth = volKnobsCanvas.parent().width();
-  var sequencerWidth = sequencerCanvas.parent().width();
 
-  sequencerCanvas.attr('height', height);
-  sequencerCanvas.attr('width', sequencerWidth);
-  var s = Snap("#sequencer");
-  var sequencer = new Compose.Sequencer();
-  sequencer.drawUI(s, 0, 0, sequencerWidth, height);
+  //TODO: eventually make canvas dimensions dependent on number of tracks (h) and song length (w)
+  // dimensions of svg canvas containing tracks
+  var timelineCanvWidth = 1000;
+  var timelineCanvHeight = 1000;
 
-  volKnobsCanvas.attr('height', height);
-  volKnobsCanvas.attr('width', volKnobsWidth);
+  // dimensions of viewport containing the tracks. Will scroll if smaller than canvas dimensions
+  var timelineVPWidth = timelineCanvas.parent().width();
+  var timelineVPHeight = $('#compose-scrollbox-y').height();
+  var volKnobsCanvWidth = volKnobsCanvas.parent().width();
+  var volKnobsCanvHeight = 1000;
+
+  timelineCanvas.attr('width', timelineCanvWidth);
+  timelineCanvas.attr('height', timelineCanvHeight);
+  var t = Snap("#timeline");
+  var sequencer = new Compose.Tracks();
+  sequencer.drawUI(t, timelineVPWidth, timelineVPHeight);
+
+  volKnobsCanvas.attr('width', volKnobsCanvWidth);
+  volKnobsCanvas.attr('height', volKnobsCanvHeight);
   var v = Snap("#volKnobs");
   var volKnobs = new Compose.VolKnobs();
   volKnobs.drawUI(v)
-});
-
-
-  //.controller()
+}]);
