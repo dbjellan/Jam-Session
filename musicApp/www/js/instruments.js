@@ -1,6 +1,6 @@
 var Instruments = (function() {
 
-  var Metronome = function() {
+  var Metronome = function() { //<-- A metronome is not an instrument, what is it doing here?
 
   }
 
@@ -8,7 +8,7 @@ var Instruments = (function() {
 
   }
 
-  //keyboard instrument with
+  //keyboard instrument with numKeys keys, [WHAT ARE THESE OTHER PARAMETERS DOING]
   var Keyboard = function(numKeys, instrumentRecorder, startingKey) {
     var defaultKeys = 24
     var defaultStartingKey = 49
@@ -35,7 +35,6 @@ var Instruments = (function() {
           ionic.Platform.ready(function() {
             console.log("creating synth:" + JSON.stringify(thisargs))
             supercollider.createSynth("pianoKey", thisargs, function(synthID) {
-              console.log("registered synthID: " + synthID + " associated with key " + j)
               thisobj.synths[j] = synthID
             })
            })
@@ -67,6 +66,7 @@ var Instruments = (function() {
         if (ionic.Platform.isAndroid())
           supercollider.setArgs(synthID, {gate: 0})
         if (thisobj.instrumentRecorder) {
+          console.log('recording action')
           thisobj.instrumentRecorder.recordAction(keyReleased.bind(undefined, id))
         }
       }

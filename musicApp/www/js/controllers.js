@@ -14,7 +14,7 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('InstrumentCtrl', function($scope, $ionicPopup) {
+.controller('InstrumentCtrl', ['$scope', 'ClipProvider', '$ionicPopup', function($scope, ClipProvider, $ionicPopup) {
   var s = Snap("#keyboard")
   var instrumentRecorder = new Playback.InstrumentRecorder(Instruments.Keyboard.bind(null, 36))
   var keyboard = new Instruments.Keyboard(36, instrumentRecorder)
@@ -49,8 +49,9 @@ angular.module('starter.controllers', [])
 
   $scope.done = function() {
     console.log("done");
-    this.isRecording = false;
+    this.isRecording = false
     this.hasTrack = true;
+    $scope.recording = $scope.instrumentRecorder.startRecording()
     //console.log("isRecording = "+ this.isRecording + " , hasTrack = " + this.hasTrack);
   }
 
@@ -58,6 +59,7 @@ angular.module('starter.controllers', [])
   $scope.play = function() {
     console.log("playing");
     var recording = $scope.instrumentRecorder.getRecording()
+    console.log(recording)
     $scope.currentLoop = new Playback.Loop(recording)
     $scope.currentLoop.play()
     //console.log("isRecording = "+ this.isRecording + " , hasTrack = " + this.hasTrack);
@@ -83,7 +85,7 @@ angular.module('starter.controllers', [])
 
   //Adds a track to the compose page and takes the user to the compose page
   $scope.addTrack = function() {
-    
+
   }
 
 
@@ -110,10 +112,10 @@ angular.module('starter.controllers', [])
       this.numbers1.push(i);
     }
 
-})
+}])
 
 
-.controller('ComposeCtrl', function($scope) {
+.controller('ComposeCtrl', ['$scope', 'ClipProvider', function($scope, ClipProvider) {
   var timelineCanvas = $('#timeline');
   var volKnobsCanvas = $('#volKnobs');
 
@@ -140,4 +142,11 @@ angular.module('starter.controllers', [])
   var v = Snap("#volKnobs");
   var volKnobs = new Compose.VolKnobs();
   volKnobs.drawUI(v)
-});
+
+
+  $scope.muteTrack = function(num) {
+    //depending on the number passed in (1-4), mute the corresponding track
+    //track.isMuted = true;
+    console.log(num)
+  }
+}]);

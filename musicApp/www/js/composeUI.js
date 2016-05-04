@@ -28,6 +28,7 @@ var ComposeUI = (function() {
   };
 
 
+  /*Draws the clips of music that represent each recorded track*/
   TracksUI.prototype.drawClips = function(svg, track, trackHeight, offsetY) {
     var color = this.clipColor;
     //console.log(track);
@@ -42,6 +43,7 @@ var ComposeUI = (function() {
     svg.dblclick(this.addNewClip)
   };
 
+  /*Adds a new clip to the compose page*/
   TracksUI.prototype.addNewClip = function(event) {
     var svgElement = event.target;
     var clipColor = this.clipColor;
@@ -92,6 +94,7 @@ var ComposeUI = (function() {
       };
     }
 
+    /*What does this do???*/
     function describeArc(x, y, radius, startAngle, endAngle){
       var start = polarToCartesian(x, y, radius, endAngle);
       var end = polarToCartesian(x, y, radius, startAngle);

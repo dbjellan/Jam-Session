@@ -12,10 +12,7 @@
 
     <section class="compose-container">
       <div class="row" id="compose-toolbar" style="height:20%">
-        <div class="col"></div>
-        <div class="col"></div>
-        <div class="col"></div>
-        <div class="col">
+        <div class="col col-33 col-offset-33">
           <div class="button-bar">
             <!-- Turn this to ion-stop when pressed?? -->
             <button class="button icon ion-play button-balanced"></button>
@@ -28,13 +25,30 @@
       <div class="row" id="arrangement">
           <!--<ion-scroll direction="y" id="track-scrollBox">-->
         <div class="col col-10" id="compose-muteButtons">
-          <button class="button icon ion-android-volume-mute"></button>
+          <!--Thanks to http://stackoverflow.com/questions/30462462/how-to-make-a-on-off-button-in-ionic for the click event code -->
+          <!--TODO: make activity dependant on a variable (isMuted, for a corresponding track) that is changed on press, rather than changing everything on press -->
+          <div class="row row-20">
+            <button class="button icon ion-android-volume-mute" ng-model="muteButton1" ng-click="muteTrack(1); muteButton1.clicked=!muteButton1.clicked" ng-class="muteButton1.clicked?'button-royal icon ion-android-volume-mute':'button-stable icon ion-android-volume-up'"></button>
+          </div>
+          <div class="row row-20">
+            <button class="button icon ion-android-volume-mute" ng-model="muteButton2" ng-click="muteTrack(2); muteButton2.clicked=!muteButton2.clicked" ng-class="muteButton2.clicked?'button-royal icon ion-android-volume-mute':'button-stable icon ion-android-volume-up'"></button>
+          </div>
+          <div class="row row-20">
+            <button class="button icon ion-android-volume-mute" ng-model="muteButton3" ng-click="muteTrack(3); muteButton3.clicked=!muteButton3.clicked" ng-class="muteButton3.clicked?'button-royal icon ion-android-volume-mute':'button-stable icon ion-android-volume-up'"></button>
+          </div>
+          <div class="row row-20">
+            <button class="button icon ion-android-volume-mute" ng-model="muteButton4" ng-click="muteTrack(4); muteButton4.clicked=!muteButton4.clicked" ng-class="muteButton4.clicked?'button-royal icon ion-android-volume-mute':'button-stable icon ion-android-volume-up'"></button>
+          </div>
         </div>
         <div class="col col-80" id="timeline-container">
             <svg id="timeline"></svg>
         </div>
         <div class="col col-10" id="compose-volKnobs">
-          <svg id="volKnobs"></svg>
+          <div class="row row-20"><svg id="volKnobs"></svg></div>
+          <div class="row row-20"><svg id="volKnobs"></svg></div>
+          <div class="row row-20"><svg id="volKnobs"></svg></div>
+          <div class="row row-20"><svg id="volKnobs"></svg></div>
+
         </div>
           <!--</ion-scroll>-->
       </div>
