@@ -8,35 +8,47 @@
 Currently not in use, but if we were to move off of ionic default colors
  */
 
- .background, .background .pane/*, .background .item, .background .item-complex .item-content*/ {
-    background-color: #414141;
+.background, .background .pane/*, .background .item, .background .item-complex .item-content*/ {
+  background-color: #414141;
 }
 
-
-.our-col {
-  width:80%;
-  margin-left:10%;
-  margin-right:10%;
-}
-
-.controller-container {
-
-  background-color:white;
-  padding:10px;
-  margin-top:10px;
-  margin-bottom:10px;
-  border-radius:4px;
-}
-
-/*allows div rows to fill remaining vertical space using percentages, based on height of sibling
-rows rather than the container as a whole
-http://stackoverflow.com/questions/27685149/equal-height-flex-row-not-working
- */
-.compose-container {
+.view-container {
   /*margin: auto;*/
   /*display: flex;*/
   /*flex-direction: column;*/
   height: 100%;
+}
+
+.view-container .instrument-row {
+  width:92%;
+  padding: 5px;
+  margin-top:0;
+  margin-bottom:0;
+  margin-left:4%;
+  margin-right:4%;
+}
+
+#controller-container {
+  height:25%;
+  min-height: 85px;
+  margin-top:1%;
+}
+
+#controller-container > .row {
+  background-color:white;
+  padding:5px;
+  /*margin-top:10px;*/
+  /*margin-bottom:10px;*/
+  border-radius:4px;
+}
+
+#addTrackBtn {
+  width: 100%
+}
+
+#keyboard-container {
+  height:85%;
+  margin-top:0;
 }
 
 #compose-toolbar {
@@ -81,3 +93,4 @@ http://stackoverflow.com/questions/27685149/equal-height-flex-row-not-working
   padding-left: 0;
   /*padding-right: 0;*/
 }
+

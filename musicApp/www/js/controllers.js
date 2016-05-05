@@ -1,7 +1,9 @@
 angular.module('starter.controllers', [])
 
-.controller('MainCtrl', function($scope) {
-  //For the sidemenu. I believe this is the right place to put it?
+.controller('MainCtrl', function($scope, $ionicSideMenuDelegate, $timeout) {
+  $timeout(function(){
+    $ionicSideMenuDelegate.edgeDragThreshold(20);
+  })
   $scope.save = function(){
     //this will be able to save a song
   };
@@ -16,16 +18,19 @@ angular.module('starter.controllers', [])
 .controller('InstrumentCtrl', ['$scope', 'ClipProvider', '$ionicPopup',
 '$location', function($scope, ClipProvider, $ionicPopup, $location) {
   var s = Snap("#keyboard")
-  var instrumentRecorder = new Playback.InstrumentRecorder(Instruments.Keyboard.bind(null, 36))
-  var keyboard = new Instruments.Keyboard(36, instrumentRecorder)
+  var totalNumKeys = 36
+  var instrumentRecorder = new Playback.InstrumentRecorder(Instruments.Keyboard.bind(null, totalNumKeys))
+  var keyboard = new Instruments.Keyboard(totalNumKeys, instrumentRecorder)
 
   $scope.metronome = new Instruments.Metronome();
 
   //width = Math.min(window.innerWidth *.8);
   //leftmargin = (window.innerWidth-width)/2
-  width = $("#keyboard-container").width()
-  keyboard.drawUI(s, 0, 0, width, 150)
+  var width = $("#keyboard-container").width()
+  var height = $("#keyboard-container").height()
+  keyboard.drawUI(s, 0, 0, width, height)
   $('#keyboard').css({'width': width})
+  $('#keyboard').css({'height': height})
 
   $scope.instrumentRecorder = instrumentRecorder;
   $scope.keyboard = keyboard;
@@ -133,9 +138,9 @@ angular.module('starter.controllers', [])
   $scope.tracksVPHeight = $('#compose-scrollbox-y').height();
   $scope.volKnobsCanvWidth = $scope.volKnobsCanvas.parent().width();
   $scope.volKnobsCanvHeight = 1000;
-
-  $scope.tracksCanvas.attr('width', $scope.tracksCanvWidth);
-  $scope.tracksCanvas.attr('height', $scope.tracksCanvHeight);
+  //$('#keyboard').css({'width': width})
+  $scope.tracksCanvas.css('width', $scope.tracksCanvWidth);
+  $scope.tracksCanvas.css('height', $scope.tracksCanvHeight);
   var t = Snap("#tracks");
   $scope.tracks = new Playback.Tracks();
 
@@ -143,8 +148,8 @@ angular.module('starter.controllers', [])
   //var sequencer = new Compose.Tracks();
   //sequencer.drawUI(t, tracksVPWidth, tracksVPHeight);
 
-  $scope.volKnobsCanvas.attr('width', $scope.volKnobsCanvWidth);
-  $scope.volKnobsCanvas.attr('height', $scope.volKnobsCanvHeight);
+  $scope.volKnobsCanvas.css('width', $scope.volKnobsCanvWidth);
+  $scope.volKnobsCanvas.css('height', $scope.volKnobsCanvHeight);
 
   //var volKnob = function(track) {
   //  this.ui = new ComposeUI.VolKnobsUI(svg)
