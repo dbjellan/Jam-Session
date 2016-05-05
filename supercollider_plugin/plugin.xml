@@ -32,6 +32,7 @@
 
     <resource-file src="synthDefs/default.scsyndef" target="assets" />
     <resource-file src="synthDefs/pianoKey.scsyndef" target="assets" />
+    <resource-file src="synthDefs/metro.scsyndef" target="assets" />
 
     <source-file src="libs/armeabi/gdbserver" target-dir="libs/armeabi" />
     <source-file src="libs/armeabi/gdb.setup" target-dir="libs/armeabi" />
