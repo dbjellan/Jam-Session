@@ -36,6 +36,7 @@ var Instruments = (function() {
             console.log("creating synth:" + JSON.stringify(thisargs))
             supercollider.createSynth("pianoKey", thisargs, function(synthID) {
               thisobj.synths[j] = synthID
+              console.log('supercollider created synth, registering id'+ synthID)
             })
            })
          })();
@@ -43,36 +44,41 @@ var Instruments = (function() {
     }
   }
 
+  Keyboard.prototype.keyPressed = function(id) {
+    //console.log(JSON.stringify(this))
+    if (id in this.synths) {
+      console.log("sending key press message to synth " + this.synths[id])
+      var synthID = this.synths[id]
+      if (ionic.Platform.isAndroid())
+        supercollider.setArgs(synthID, {gate: 1})
+      if (this.instrumentRecorder) {
+        this.instrumentRecorder.recordAction(this.keyPressed, [id])
+      }
+    } else {
+    console.log('id not found:' + id)
+  }
+  }
+
+  Keyboard.prototype.keyReleased = function(id) {
+    //console.log(JSON.stringify(this))
+    if (id in this.synths) {
+      console.log("sending key release message to synth " + this.synths[id])
+      var synthID = this.synths[id]
+      if (ionic.Platform.isAndroid())
+        supercollider.setArgs(synthID, {gate: 0})
+      if (this.instrumentRecorder) {
+        console.log('recording action')
+        this.instrumentRecorder.recordAction(this.keyReleased, [id])
+      }
+    } else {
+      console.log('id not found: ' + id)
+    }
+  }
 
   Keyboard.prototype.drawUI = function(svg, x, y, width, height) {
     //TODO: ?? do we need to check if everything initialized properlly
-    thisobj = this
-    var keyPressed = function(id) {
-      if (id in thisobj.synths) {
-        console.log("sending key press message to synth " + thisobj.synths[id])
-        var synthID = thisobj.synths[id]
-        if (ionic.Platform.isAndroid())
-          supercollider.setArgs(synthID, {gate: 1})
-        if (thisobj.instrumentRecorder) {
-          thisobj.instrumentRecorder.recordAction(keyPressed.bind(thisobj, id))
-        }
-      }
-    }
-
-    var keyReleased = function(id) {
-      if (id in thisobj.synths) {
-        console.log("sending key release message to synth " + thisobj.synths[id])
-        var synthID = thisobj.synths[id]
-        if (ionic.Platform.isAndroid())
-          supercollider.setArgs(synthID, {gate: 0})
-        if (thisobj.instrumentRecorder) {
-          console.log('recording action')
-          thisobj.instrumentRecorder.recordAction(keyReleased.bind(undefined, id))
-        }
-      }
-    }
-
-    this.ui = new Drawing.KeyboardUI(svg, x, y, width, height, this.numKeys, keyPressed, keyReleased)
+    this.ui = new Drawing.KeyboardUI(svg, x, y, width, height, this.numKeys,
+       this.keyPressed.bind(this), this.keyReleased.bind(this))
   }
 
   var exports = {

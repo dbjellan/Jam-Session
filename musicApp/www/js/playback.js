@@ -4,16 +4,22 @@ var Playback = (function() {
     this.startTime = null;
     this.instrumentConstructor = instrumentConstructor;
     this.clip = []
+    this.recording = false
   }
 
   InstrumentRecorder.prototype.startRecording = function() {
-    if (! this.startTime) {
+    if (! this.recording) {
       this.startTime = new Date()
+      this.recording = true
+      this.clip = []
+      this.duration = false
     }
   }
 
   InstrumentRecorder.prototype.getRecording = function() {
     if (this.duration) {
+      console.log('returning recording')
+      console.log('data:' + JSON.stringify(this.clip))
       var recordingObj = {
         instrumentConstructor: this.instrumentConstructor,
         data: this.clip,
@@ -24,21 +30,20 @@ var Playback = (function() {
   }
 
   InstrumentRecorder.prototype.stopRecording = function() {
+    console.log('stopped recording')
     if (this.startTime) {
       this.duration = new Date() - this.startTime
-      this.startTime = false
-      this.clip
-
+      this.recording = false
       return this.getRecording()
 
     }
   }
 
-  InstrumentRecorder.prototype.recordAction = function(actionCB) {
+  InstrumentRecorder.prototype.recordAction = function(actionCB, args) {
     if (this.startTime) {
       var time = new Date() - this.startTime
-      this.clip.push([time, actionCB])
-      console.log('recording action')
+      this.clip.push([time, actionCB, args])
+      console.log('recording action in instrument recorder: ' + args)
     }
   }
 
@@ -91,10 +96,12 @@ var Playback = (function() {
   }
 
   Loop.prototype.play = function() {
-    var instrument = new this.clip.instrumentConstructor()
-    for (var i = 0; i < this.clip.data.length; i++) {
-      this.recording.data[i].bind(instrument)
-    }
+    //this.instrument = new this.clip.instrumentConstructor()
+    this.instrument = new Instruments.Keyboard(36)
+    //for (var i = 0; i < this.clip.data.length; i++) {
+    //  this.clip.data[i][1].bind(this.instrument)
+    //}
+    console.log("playing with instrument: " + JSON.stringify(this.instrument))
     this.loopStart = new Date()
     this.actionIndex = 0
     this.completedLoops = 0
@@ -104,10 +111,13 @@ var Playback = (function() {
 
   Loop.prototype._play = function() {
     var time = new Date() - this.loopStart
-
+    var instrument = this.instrument
     //call callbacks to make noise according to current time
-    while(this.actionIndex < this.recording.data.length && this.recording.data[this.actionIndex][0] < time) {
-      this.recording.data[this.actionIndex][1]()
+    while(this.actionIndex < this.clip.data.length && this.clip.data[this.actionIndex][0] < time) {
+      console.log(JSON.stringify(instrument))
+      //apply  action function with correction this and args
+      this.clip.data[this.actionIndex][1].apply(instrument,
+        this.clip.data[this.actionIndex][2])
       this.actionIndex++
     }
 
