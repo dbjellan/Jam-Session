@@ -1,8 +1,8 @@
 var Playback = (function() {
 
   var InstrumentRecorder = function(instrumentConstructor) {
-    this.startTime = null
-    this.instrumentConstructor = instrumentConstructor
+    this.startTime = null;
+    this.instrumentConstructor = instrumentConstructor;
     this.clip = []
     this.recording = false
   }
@@ -47,8 +47,12 @@ var Playback = (function() {
     }
   }
 
-  var Track = function() {
-    this.loops = []
+  var Track = function(instrument) {
+    var defaultVolume = 75;
+    this.instrument = instrument;
+    this.loops = [];
+    this.volume = defaultVolume;
+    this.isMuted = false;
   }
 
   Track.prototype.addLoop = function(loop) {
@@ -134,15 +138,19 @@ var Playback = (function() {
     window.clearInterval(this.intervalID)
   }
 
-  var Sequencer = function() {
+  var Tracks = function() {
+    this.tracks = []
+  };
 
-  }
+  Tracks.prototype.addTrack = function(track) {
+    this.tracks.push(track)
+  };
 
   var exports = {
     InstrumentRecorder: InstrumentRecorder,
     Track: Track,
     Loop: Loop,
-    Sequencer: Sequencer
+    Tracks: Tracks
   }
 
   return exports;

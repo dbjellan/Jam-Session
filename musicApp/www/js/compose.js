@@ -1,5 +1,6 @@
 var Compose = (function() {
 
+
   var Tracks = function() {
     this.tracks = [];
     this.addTrack("instrument1");
@@ -34,11 +35,6 @@ var Compose = (function() {
     var clip = new Clip(startTime, duration);
     this.clips.push(clip);
   };
-
-  //
-  //var Clip = function(startTime, duration) {
-  //
-  //}
 
   Tracks.prototype.drawUI = function(svg, width, height) {
     this.ui = new ComposeUI.TracksUI(svg, width, height, this.tracks)
