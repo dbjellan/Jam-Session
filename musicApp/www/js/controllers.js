@@ -1,4 +1,3 @@
-var v = Snap("#volButtons");
 angular.module('starter.controllers', [])
 
 .controller('MainCtrl', function($scope) {
@@ -117,32 +116,46 @@ angular.module('starter.controllers', [])
 
 
 .controller('ComposeCtrl', ['$scope', 'ClipProvider', function($scope, ClipProvider) {
-  var timelineCanvas = $('#timeline');
-  var volKnobsCanvas = $('#volKnobs');
-
+  $scope.tracksCanvas = $('#tracks');
+  $scope.volKnobsCanvas = $('#volKnobs');
 
   //TODO: eventually make canvas dimensions dependent on number of tracks (h) and song length (w)
   // dimensions of svg canvas containing tracks
-  var timelineCanvWidth = 1000;
-  var timelineCanvHeight = 1000;
+  $scope.tracksCanvWidth = 1000;
+  $scope.tracksCanvHeight = 1000;
 
   // dimensions of viewport containing the tracks. Will scroll if smaller than canvas dimensions
-  var timelineVPWidth = timelineCanvas.parent().width();
-  var timelineVPHeight = $('#compose-scrollbox-y').height();
-  var volKnobsCanvWidth = volKnobsCanvas.parent().width();
-  var volKnobsCanvHeight = 1000;
+  $scope.tracksVPWidth = $scope.tracksCanvas.parent().width();
+  $scope.tracksVPHeight = $('#compose-scrollbox-y').height();
+  $scope.volKnobsCanvWidth = $scope.volKnobsCanvas.parent().width();
+  $scope.volKnobsCanvHeight = 1000;
 
-  timelineCanvas.attr('width', timelineCanvWidth);
-  timelineCanvas.attr('height', timelineCanvHeight);
-  var t = Snap("#timeline");
-  var sequencer = new Compose.Tracks();
-  sequencer.drawUI(t, timelineVPWidth, timelineVPHeight);
+  $scope.tracksCanvas.attr('width', $scope.tracksCanvWidth);
+  $scope.tracksCanvas.attr('height', $scope.tracksCanvHeight);
+  var t = Snap("#tracks");
+  $scope.tracks = new Playback.Tracks();
 
-  volKnobsCanvas.attr('width', volKnobsCanvWidth);
-  volKnobsCanvas.attr('height', volKnobsCanvHeight);
+  //var ui = new ComposeUI.TracksUI(t, tracksVPWidth, height, tracks)
+  //var sequencer = new Compose.Tracks();
+  //sequencer.drawUI(t, tracksVPWidth, tracksVPHeight);
+
+  $scope.volKnobsCanvas.attr('width', $scope.volKnobsCanvWidth);
+  $scope.volKnobsCanvas.attr('height', $scope.volKnobsCanvHeight);
+
+  //var volKnob = function(track) {
+  //  this.ui = new ComposeUI.VolKnobsUI(svg)
+  //}
+
+  $scope.volKnobs = null
   var v = Snap("#volKnobs");
-  var volKnobs = new Compose.VolKnobs();
-  volKnobs.drawUI(v)
+  $scope.drawVolKnobs = function() {
+    this.ui = new ComposeUI.VolKnobsUI(v);
+  }
+  $scope.drawVolKnobs()
+  //var volKnobs = new Compose.VolKnobs();
+  //volKnobs.drawUI(v)
+
+  $scope.ui = new ComposeUI.TracksUI(t, $scope.volKnobsCanvWidth, $scope.volKnobsCanvHeight, $scope.tracks);
 
 
   $scope.muteTrack = function(num) {

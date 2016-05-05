@@ -23,7 +23,7 @@ var ComposeUI = (function() {
         strokeWidth: 2,
         svgType: "track"
       });
-      this.drawClips(svg, tracks[i], trackHeight, offsetY);
+      //this.drawClips(svg, tracks[i], trackHeight, offsetY);
     }
   };
 
