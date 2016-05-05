@@ -4,16 +4,19 @@ var Playback = (function() {
     this.startTime = null
     this.instrumentConstructor = instrumentConstructor
     this.clip = []
+    this.recording = false
   }
 
   InstrumentRecorder.prototype.startRecording = function() {
-    if (! this.startTime) {
+    if (! this.recording) {
       this.startTime = new Date()
+      this.recording = true
+      this.clip = []
+      this.duration = false
     }
   }
 
   InstrumentRecorder.prototype.getRecording = function() {
-
     if (this.duration) {
       console.log('returning recording')
       console.log('data:' + JSON.stringify(this.clip))
@@ -30,7 +33,7 @@ var Playback = (function() {
     console.log('stopped recording')
     if (this.startTime) {
       this.duration = new Date() - this.startTime
-      this.startTime = false
+      this.recording = false
       return this.getRecording()
 
     }

@@ -14,7 +14,8 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('InstrumentCtrl', ['$scope', 'ClipProvider', '$ionicPopup', function($scope, ClipProvider, $ionicPopup) {
+.controller('InstrumentCtrl', ['$scope', 'ClipProvider', '$ionicPopup',
+'$location', function($scope, ClipProvider, $ionicPopup, $location) {
   var s = Snap("#keyboard")
   var instrumentRecorder = new Playback.InstrumentRecorder(Instruments.Keyboard.bind(null, 36))
   var keyboard = new Instruments.Keyboard(36, instrumentRecorder)
@@ -85,6 +86,7 @@ angular.module('starter.controllers', [])
   //Adds a track to the compose page and takes the user to the compose page
   $scope.addTrack = function() {
     ClipProvider.addClip($scope.recording)
+    $location.path('/compose')
   }
 
 
