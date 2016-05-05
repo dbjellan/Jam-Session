@@ -141,4 +141,11 @@ angular.module('starter.controllers', [])
   var v = Snap("#volKnobs");
   var volKnobs = new Compose.VolKnobs();
   volKnobs.drawUI(v)
+
+
+  $scope.muteTrack = function(num) {
+    //depending on the number passed in (1-4), mute the corresponding track
+    //track.isMuted = true;
+    console.log(num)
+  }
 }]);
