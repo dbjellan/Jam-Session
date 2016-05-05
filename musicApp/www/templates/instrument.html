@@ -13,7 +13,7 @@
         <div class="col">
           <label class="item item-input item-select">
             <div class="input-label">BPM</div>
-            <select ng-model="BPM">
+            <select ng-model="BPM" ng-change="metronome.setBPM(BPM)">
               <option value="40">40</option>
               <option value="60">60</option>
               <option value="80">80</option>
@@ -32,7 +32,7 @@
               <div class="item item-input item-light">
                 <span class="input-label">Metronome</span>
                 <label class="toggle toggle-royal">
-                  <input type="checkbox" ng-model="metronome.value" ng-true-value="'ON'" ng-false-value="'OFF'" ng-change="playMetronome(BPM)">
+                  <input type="checkbox" ng-model="metronome.value" ng-true-value="'ON'" ng-false-value="'OFF'" ng-change="metronome.toggle()">
                   <div class="track">
                     <div class="handle"></div>
                   </div>
@@ -58,10 +58,3 @@
 
   </ion-content>
 </ion-view>
-
-
-
-
-
-
-

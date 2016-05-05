@@ -1,11 +1,63 @@
 var Instruments = (function() {
 
   var Metronome = function() { //<-- A metronome is not an instrument, what is it doing here?
+    this.BPM = 120;
+    this.enabled = false
+    this.playing = false
+    var thisobj = this
+    if (ionic.Platform.isAndroid()) {
+      ionic.Platform.ready(function() {
+        args = {
+          tempo: 0.0,
+          filterfreq: 1000,
+          rq: 1.0
+        }
+        supercollider.createSynth("metro", args, function(synthID) {
+          thisobj.synthID = synthID
+          console.log('got synthid : ' + synthID)
+        })
+      })
+    }
+  }
 
+  Metronome.prototype.setBPM = function(BPM) {
+    this.BPM = BPM
   }
 
   Metronome.prototype.play = function() {
+    if (this.enabled) {
+      console.log('starting metronome with temp: ' + this.BPM/60)
+      this.playing = true
+      if (ionic.Platform.isAndroid()) {
+        ionic.Platform.ready(function() {
+          var args = {
+            tempo: this.BPM/60
+          }
+          supercollider.setArgs(this.synthID, args)
+        })
+      }
+    }
+  }
 
+  Metronome.prototype.toggle = function() {
+    this.enabled = ! this.enabled
+    if (this.playing) {
+      this.playing = false
+    }
+    console.log('metronome is enabled: ' + this.enabled)
+  }
+
+  Metronome.prototype.stop = function() {
+    console.log('stopping metronome')
+    this.playing = false
+    if (ionic.Platform.isAndroid()) {
+      ionic.Platform.ready(function() {
+        var args = {
+          tempo: 0,
+        }
+        supercollider.setArgs(this.synthID, args)
+      })
+    }
   }
 
   //keyboard instrument with numKeys keys, [WHAT ARE THESE OTHER PARAMETERS DOING]
@@ -36,7 +88,6 @@ var Instruments = (function() {
             console.log("creating synth:" + JSON.stringify(thisargs))
             supercollider.createSynth("pianoKey", thisargs, function(synthID) {
               thisobj.synths[j] = synthID
-              console.log('supercollider created synth, registering id'+ synthID)
             })
            })
          })();
@@ -67,7 +118,6 @@ var Instruments = (function() {
       if (ionic.Platform.isAndroid())
         supercollider.setArgs(synthID, {gate: 0})
       if (this.instrumentRecorder) {
-        console.log('recording action')
         this.instrumentRecorder.recordAction(this.keyReleased, [id])
       }
     } else {

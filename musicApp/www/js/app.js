@@ -71,10 +71,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   var instance = {
     clips: [],
     addClip: function(clip) {
-      clips.push(clip)
+      this.clips.push(clip)
     },
     getClips: function() {
-      return clips
+      return this.clips
     }
   }
   return instance

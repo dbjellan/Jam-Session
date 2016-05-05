@@ -19,6 +19,8 @@ angular.module('starter.controllers', [])
   var instrumentRecorder = new Playback.InstrumentRecorder(Instruments.Keyboard.bind(null, 36))
   var keyboard = new Instruments.Keyboard(36, instrumentRecorder)
 
+  $scope.metronome = new Instruments.Metronome();
+
   //width = Math.min(window.innerWidth *.8);
   //leftmargin = (window.innerWidth-width)/2
   width = $("#keyboard-container").width()
@@ -44,6 +46,7 @@ angular.module('starter.controllers', [])
     console.log("recording");
     this.isRecording = true;
     $scope.instrumentRecorder.startRecording()
+    $scope.metronome.play()
     //console.log("isRecording = "+ this.isRecording + " , hasTrack = " + this.hasTrack);
   }
 
@@ -51,6 +54,7 @@ angular.module('starter.controllers', [])
     this.isRecording = false
     this.hasTrack = true;
     $scope.recording = $scope.instrumentRecorder.stopRecording()
+    $scope.metronome.stop()
     console.log("done recording: " + JSON.stringify($scope.recording) );
     //console.log("isRecording = "+ this.isRecording + " , hasTrack = " + this.hasTrack);
   }
