@@ -45,7 +45,7 @@ var Instruments = (function() {
 
 
   Keyboard.prototype.drawUI = function(svg, x, y, width, height) {
-    //TODO: ?? do we need to check if everything initialized properly
+    //TODO: ?? do we need to check if everything initialized properlly
     thisobj = this
     var keyPressed = function(id) {
       if (id in thisobj.synths) {
